@@ -1,11 +1,9 @@
-// import addRevenueCategoryService from "../services/revenue.service";
 const service = require("../services/revenue.service");
 
-const addRevenueCategoryController = (req, res) => {
+const addRevenueCategory = (req, res) => {
   service
-    .addRevenueCategoryService()
+    .addRevenueCategory()
     .then((resp) => {
-      console.log("inside controller", resp);
       res.status(200).send(resp);
     })
     .catch((err) => {
@@ -13,4 +11,4 @@ const addRevenueCategoryController = (req, res) => {
     });
 };
 
-module.exports = { addRevenueCategoryController };
+module.exports = { addRevenueCategory };
