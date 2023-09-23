@@ -3,7 +3,7 @@ const dao = require("../dao/revenue.dao");
 const addRevenueCategory = async () => {
   let rows = [];
   await dao
-    .addRevenueCategory()
+    .addRevenueCategory() // calling addRevenueCategory from dao which returns all the revenue categories
     .then((res) => {
       rows = res;
     })

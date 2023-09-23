@@ -3,12 +3,9 @@ const controller = require("../controllers/revenue.controller");
 
 var router = express.Router();
 
-router.get("/new", (req, res) => {
+// api/v1/revenue/new ==> calls the addRevenueCategory() from the controller
+router.get("/", (req, res) => {
   controller.addRevenueCategory(req, res);
-});
-
-router.get("/hello", (req, res) => {
-  res.send("Hello");
 });
 
 module.exports = router;

@@ -2,7 +2,7 @@ const service = require("../services/revenue.service");
 
 const addRevenueCategory = (req, res) => {
   service
-    .addRevenueCategory()
+    .addRevenueCategory() // calling addRevenueCategory from service which returns all the revenue categories
     .then((resp) => {
       res.status(200).send(resp);
     })
