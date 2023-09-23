@@ -1,8 +1,24 @@
-import addRevenueCategoryDao from "../dao/revenue.dao";
-const express = require("express");
+// import addRevenueCategoryDao from "../dao/revenue.dao";
+const dao = require("../dao/revenue.dao");
 
 const addRevenueCategoryService = async () => {
-  return addRevenueCategoryDao();
+  let rows = [];
+  await dao
+    .addRevenueCategoryDao()
+    .then((res) => {
+      console.log("inside service: ", res);
+      rows = res;
+      // return res;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally((resp) => {
+      if (resp) return resp;
+    });
+
+  return rows;
 };
 
-export default addRevenueCategoryService;
+module.exports = { addRevenueCategoryService };
+// export default addRevenueCategoryService;

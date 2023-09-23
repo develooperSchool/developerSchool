@@ -1,11 +1,16 @@
-import addRevenueCategoryService from "../services/revenue.service";
+// import addRevenueCategoryService from "../services/revenue.service";
+const service = require("../services/revenue.service");
 
-var express = require("express");
-
-const addRevenueCategoryController = () => {
-  const rows = addRevenueCategoryService();
-  console.log("inside dao", rows);
-  res.send(rows);
+const addRevenueCategoryController = (req, res) => {
+  service
+    .addRevenueCategoryService()
+    .then((resp) => {
+      console.log("inside controller", resp);
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
-export default addRevenueCategoryController;
+module.exports = { addRevenueCategoryController };
