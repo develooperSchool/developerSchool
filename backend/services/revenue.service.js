@@ -1,20 +1,71 @@
 const dao = require("../dao/revenue.dao");
 
-const addRevenueCategory = async () => {
+const getAllRevenueCategories = async () => {
   let rows = [];
   await dao
-    .addRevenueCategory() // calling addRevenueCategory from dao which returns all the revenue categories
+    .getAllRevenueCategories() // calling getAllRevenueCategories from dao which returns all the revenue categories
     .then((res) => {
       rows = res;
     })
     .catch((err) => {
       console.log(err);
-    })
-    .finally((resp) => {
-      if (resp) return resp;
     });
 
   return rows;
 };
 
-module.exports = { addRevenueCategory };
+const addRevenueCategory = async (name) => {
+  // let rows = [];
+  await dao
+    .addRevenueCategory(name)
+    .then(() => {
+      // rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  // return rows;
+};
+const deleteRevenueCategory = async (name) => {
+  // let rows = [];
+  await dao
+    .deleteRevenueCategory(name)
+    .then(() => {
+      // rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const udpateRevenueCategoryById = async (id, name) => {
+  // let rows = [];
+  await dao
+    .udpateRevenueCategoryById(id, name)
+    .then(() => {
+      // rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const savePaymentDetails = async (body) => {
+  // let rows = [];
+  await dao
+    .savePaymentDetails(body)
+    .then(() => {
+      // rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+module.exports = {
+  getAllRevenueCategories,
+  addRevenueCategory,
+  deleteRevenueCategory,
+  udpateRevenueCategoryById,
+  savePaymentDetails,
+};

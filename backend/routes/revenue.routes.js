@@ -3,9 +3,24 @@ const controller = require("../controllers/revenue.controller");
 
 var router = express.Router();
 
-// api/v1/revenue/new ==> calls the addRevenueCategory() from the controller
 router.get("/", (req, res) => {
+  controller.getAllRevenueCategories(req, res);
+});
+
+router.post("/add", (req, res) => {
   controller.addRevenueCategory(req, res);
+});
+
+router.delete("/delete", (req, res) => {
+  controller.deleteRevenueCategory(req, res);
+});
+
+router.put("/update", (req, res) => {
+  controller.udpateRevenueCategoryById(req, res);
+});
+
+router.post("/payment", (req, res) => {
+  controller.savePaymentDetails(req, res);
 });
 
 module.exports = router;
