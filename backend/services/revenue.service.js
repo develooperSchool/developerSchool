@@ -62,10 +62,23 @@ const saveIncomePaymentDetails = async (body) => {
       console.log(err);
     });
 };
+
+const saveExpensePaymentDetails = async (body) => {
+  // let rows = [];
+  await dao
+    .saveExpensePaymentDetails(body)
+    .then(() => {
+      // rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 module.exports = {
   getAllRevenueCategories,
   addRevenueCategory,
   deleteRevenueCategory,
   udpateRevenueCategoryById,
   saveIncomePaymentDetails,
+  saveExpensePaymentDetails,
 };

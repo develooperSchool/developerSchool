@@ -23,4 +23,8 @@ router.post("/payment", (req, res) => {
   controller.saveIncomePaymentDetails(req, res);
 });
 
+router.post("/expense", (req, res) => {
+  controller.saveExpensePaymentDetails(req, res);
+});
+
 module.exports = router;

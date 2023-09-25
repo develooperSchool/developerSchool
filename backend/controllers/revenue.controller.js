@@ -55,7 +55,20 @@ const saveIncomePaymentDetails = (req, res) => {
     .saveIncomePaymentDetails(req.body)
     .then(() => {
       // console.log(resp);
-      res.status(200).send("REGISTRAION CHARGES PAYMENT SUCCESSFUL");
+      res.status(200).send("INCOME PAYMENT SUCCESSFUL");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const saveExpensePaymentDetails = (req, res) => {
+  console.log(req.body);
+  service
+    .saveExpensePaymentDetails(req.body)
+    .then(() => {
+      // console.log(resp);
+      res.status(200).send("EXPENSE PAYMENT SUCCESSFUL");
     })
     .catch((err) => {
       console.log(err);
@@ -68,4 +81,5 @@ module.exports = {
   deleteRevenueCategory,
   udpateRevenueCategoryById,
   saveIncomePaymentDetails,
+  saveExpensePaymentDetails,
 };
