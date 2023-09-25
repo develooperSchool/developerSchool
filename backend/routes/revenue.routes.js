@@ -20,7 +20,7 @@ router.put("/update", (req, res) => {
 });
 
 router.post("/payment", (req, res) => {
-  controller.savePaymentDetails(req, res);
+  controller.saveIncomePaymentDetails(req, res);
 });
 
 module.exports = router;

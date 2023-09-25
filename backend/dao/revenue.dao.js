@@ -49,7 +49,7 @@ const udpateRevenueCategoryById = async (id, name) => {
   return row;
 };
 
-const savePaymentDetails = async (body) => {
+const saveIncomePaymentDetails = async (body) => {
   const {
     userId,
     studentId,
@@ -97,5 +97,5 @@ module.exports = {
   addRevenueCategory,
   deleteRevenueCategory,
   udpateRevenueCategoryById,
-  savePaymentDetails,
+  saveIncomePaymentDetails,
 };

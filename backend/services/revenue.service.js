@@ -51,10 +51,10 @@ const udpateRevenueCategoryById = async (id, name) => {
     });
 };
 
-const savePaymentDetails = async (body) => {
+const saveIncomePaymentDetails = async (body) => {
   // let rows = [];
   await dao
-    .savePaymentDetails(body)
+    .saveIncomePaymentDetails(body)
     .then(() => {
       // rows = res;
     })
@@ -67,5 +67,5 @@ module.exports = {
   addRevenueCategory,
   deleteRevenueCategory,
   udpateRevenueCategoryById,
-  savePaymentDetails,
+  saveIncomePaymentDetails,
 };

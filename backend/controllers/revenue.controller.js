@@ -49,10 +49,10 @@ const udpateRevenueCategoryById = (req, res) => {
       console.log(err);
     });
 };
-const savePaymentDetails = (req, res) => {
+const saveIncomePaymentDetails = (req, res) => {
   console.log(req.body);
   service
-    .savePaymentDetails(req.body)
+    .saveIncomePaymentDetails(req.body)
     .then(() => {
       // console.log(resp);
       res.status(200).send("REGISTRAION CHARGES PAYMENT SUCCESSFUL");
@@ -67,5 +67,5 @@ module.exports = {
   addRevenueCategory,
   deleteRevenueCategory,
   udpateRevenueCategoryById,
-  savePaymentDetails,
+  saveIncomePaymentDetails,
 };
