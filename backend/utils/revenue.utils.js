@@ -3,7 +3,7 @@ const isNullOrUndefined = (input) => {
 };
 
 const isInvalidId = (input) => {
-  return typeof input === "string" || parseInt(input) <= 0;
+  return !/^[0-9]+$/.test(input) || parseInt(input) <= 0;
 };
 
 const isInvalidAmount = (amount) => {
@@ -11,8 +11,9 @@ const isInvalidAmount = (amount) => {
 };
 
 const respond = (status, message, res, next) => {
-  if (status !== 0 || message !== "") res.status(status).send(message);
-  else next();
+  if (status !== 0 || message !== "") {
+    res.status(status).send(message);
+  } else next();
 };
 
 module.exports = { isNullOrUndefined, isInvalidId, isInvalidAmount, respond };
