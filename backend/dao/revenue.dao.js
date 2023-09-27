@@ -25,10 +25,10 @@ const addRevenueCategory = async (name) => {
   return row;
 };
 
-const deleteRevenueCategory = async (name) => {
-  let row = [name];
+const deleteRevenueCategory = async (id) => {
+  let row = [id];
   try {
-    let query = "DELETE FROM  revenue_category WHERE name = ? ";
+    let query = "DELETE FROM  revenue_category WHERE id = ? ";
     const rows = db.execute(query, row);
     console.log("result", rows);
   } catch (err) {
@@ -111,14 +111,74 @@ const saveExpensePaymentDetails = async (body) => {
     //     "INSERT INTO expense (revenue_category_id, amount, remark)" +
     //     "VALUES(?, ?, ?)";
     // }
-    const rows = db.query(query, values);
-    console.log("result", rows);
+    const rows = db.query(query, values, function (err, records, fields) {
+      console.log(records);
+      console.log(fields);
+    });
+    // console.log("result", rows);
     row = rows;
   } catch (err) {
     console.error(err);
   }
   return row;
 };
+
+const getAllIncomeDetils = async () => {
+  let row = [];
+  try {
+    const [rows, fields] = await db.query(
+      "SELECT * FROM income ORDER BY income_id"
+    );
+    row = rows;
+  } catch (err) {
+    console.error(err);
+  }
+  return row;
+};
+
+const getIncomeDetilsById = async (id) => {
+  let row = [];
+  let values = [id];
+  try {
+    const [rows, fields] = await db.query(
+      "SELECT * FROM income WHERE income_id = ?",
+      values
+    );
+    row = rows;
+  } catch (err) {
+    console.error(err);
+  }
+  return row;
+};
+
+const getAllExpenseDetils = async () => {
+  let row = [];
+  try {
+    const [rows, fields] = await db.query(
+      "SELECT * FROM expense ORDER BY expense_id"
+    );
+    row = rows;
+  } catch (err) {
+    console.error(err);
+  }
+  return row;
+};
+
+const getExpenseDetilsById = async (id) => {
+  let row = [];
+  let values = [id];
+  try {
+    const [rows, fields] = await db.query(
+      "SELECT * FROM expense WHERE expense_id = ?",
+      values
+    );
+    row = rows;
+  } catch (err) {
+    console.error(err);
+  }
+  return row;
+};
+
 module.exports = {
   getAllRevenueCategories,
   addRevenueCategory,
@@ -126,4 +186,8 @@ module.exports = {
   udpateRevenueCategoryById,
   saveIncomePaymentDetails,
   saveExpensePaymentDetails,
+  getAllIncomeDetils,
+  getAllExpenseDetils,
+  getIncomeDetilsById,
+  getExpenseDetilsById,
 };

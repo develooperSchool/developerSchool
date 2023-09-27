@@ -2,7 +2,7 @@ const service = require("../services/revenue.service");
 
 const getAllRevenueCategories = (req, res) => {
   service
-    .getAllRevenueCategories() // calling getAllRevenueCategories from service which returns all the revenue categories
+    .getAllRevenueCategories()
     .then((resp) => {
       console.log(resp);
       res.status(200).send(resp);
@@ -25,9 +25,9 @@ const addRevenueCategory = (req, res) => {
 };
 
 const deleteRevenueCategory = (req, res) => {
-  console.log(req.query.name);
+  console.log(req.params.id);
   service
-    .deleteRevenueCategory(req.query.name)
+    .deleteRevenueCategory(req.params.id)
     .then(() => {
       // console.log(resp);
       res.status(200).send("DELETED SUCCESSFULLY");
@@ -38,9 +38,9 @@ const deleteRevenueCategory = (req, res) => {
 };
 
 const udpateRevenueCategoryById = (req, res) => {
-  console.log(req.query.id, req.body.name);
+  console.log(req.params.id, req.body.name);
   service
-    .udpateRevenueCategoryById(req.query.id, req.body.name)
+    .udpateRevenueCategoryById(req.params.id, req.body.name)
     .then(() => {
       // console.log(resp);
       res.status(200).send("UPDATE SUCCESSFULLY");
@@ -75,6 +75,54 @@ const saveExpensePaymentDetails = (req, res) => {
     });
 };
 
+const getAllIncomeDetils = (req, res) => {
+  service
+    .getAllIncomeDetils()
+    .then((resp) => {
+      console.log(resp);
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const getIncomeDetilsById = (req, res) => {
+  service
+    .getIncomeDetilsById(req.params.id)
+    .then((resp) => {
+      console.log(resp);
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const getAllExpenseDetils = (req, res) => {
+  service
+    .getAllExpenseDetils()
+    .then((resp) => {
+      console.log(resp);
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const getExpenseDetilsById = (req, res) => {
+  service
+    .getExpenseDetilsById(req.params.id)
+    .then((resp) => {
+      console.log(resp[0].expense);
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 module.exports = {
   getAllRevenueCategories,
   addRevenueCategory,
@@ -82,4 +130,8 @@ module.exports = {
   udpateRevenueCategoryById,
   saveIncomePaymentDetails,
   saveExpensePaymentDetails,
+  getAllIncomeDetils,
+  getIncomeDetilsById,
+  getAllExpenseDetils,
+  getExpenseDetilsById,
 };

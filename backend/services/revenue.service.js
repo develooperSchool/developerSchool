@@ -27,10 +27,10 @@ const addRevenueCategory = async (name) => {
 
   // return rows;
 };
-const deleteRevenueCategory = async (name) => {
+const deleteRevenueCategory = async (id) => {
   // let rows = [];
   await dao
-    .deleteRevenueCategory(name)
+    .deleteRevenueCategory(id)
     .then(() => {
       // rows = res;
     })
@@ -74,6 +74,63 @@ const saveExpensePaymentDetails = async (body) => {
       console.log(err);
     });
 };
+
+const getAllIncomeDetils = async () => {
+  let rows = [];
+  await dao
+    .getAllIncomeDetils() // calling getAllRevenueCategories from dao which returns all the revenue categories
+    .then((res) => {
+      rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return rows;
+};
+
+const getIncomeDetilsById = async (id) => {
+  let rows = [];
+  await dao
+    .getIncomeDetilsById(id) // calling getAllRevenueCategories from dao which returns all the revenue categories
+    .then((res) => {
+      rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return rows;
+};
+
+const getAllExpenseDetils = async () => {
+  let rows = [];
+  await dao
+    .getAllExpenseDetils() // calling getAllRevenueCategories from dao which returns all the revenue categories
+    .then((res) => {
+      rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return rows;
+};
+
+const getExpenseDetilsById = async (id) => {
+  let rows = [];
+  await dao
+    .getExpenseDetilsById(id) // calling getAllRevenueCategories from dao which returns all the revenue categories
+    .then((res) => {
+      rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return rows;
+};
+
 module.exports = {
   getAllRevenueCategories,
   addRevenueCategory,
@@ -81,4 +138,8 @@ module.exports = {
   udpateRevenueCategoryById,
   saveIncomePaymentDetails,
   saveExpensePaymentDetails,
+  getAllIncomeDetils,
+  getIncomeDetilsById,
+  getAllExpenseDetils,
+  getExpenseDetilsById,
 };
