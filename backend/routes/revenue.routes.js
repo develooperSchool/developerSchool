@@ -1,6 +1,13 @@
 var express = require("express");
 const controller = require("../controllers/revenue.controller");
 const util = require("../utils/revenue.utils");
+const {
+  INVALID_ID,
+  INVALID_USER_ID,
+  INVALID_REVENUE_CATEGORY_ID,
+  INVALID_STUDENT_ID,
+  AMOUNT_CANNOT_BE_ZERO,
+} = require("../utils/revenue.contants");
 
 var router = express.Router();
 
@@ -13,7 +20,7 @@ router.post("/add", (req, res) => {
 });
 
 router.use("/delete/:id", (req, res, next) => {
-  if (util.isInvalidId(req.params.id)) res.status(400).send("Invalid Id");
+  if (util.isInvalidId(req.params.id)) res.status(400).send(INVALID_ID);
   else next();
 });
 
@@ -22,7 +29,7 @@ router.delete("/delete/:id", (req, res) => {
 });
 
 router.use("/update/:id", (req, res, next) => {
-  if (util.isInvalidId(req.params.id)) res.status(400).send("Invalid Id");
+  if (util.isInvalidId(req.params.id)) res.status(400).send(INVALID_ID);
   else next();
 });
 
@@ -35,11 +42,11 @@ router.use("/payment", (req, res, next) => {
     util.isNullOrUndefined(req.body.userId) ||
     util.isInvalidId(req.body.userId)
   ) {
-    res.status(400).send("Invalid User Id");
+    res.status(400).send(INVALID_USER_ID);
   }
 
   if (util.isInvalidId(req.body.revenueCategoryId)) {
-    res.status(400).send("Invalid Revenue Category Id");
+    res.status(400).send(INVALID_REVENUE_CATEGORY_ID);
   }
 
   if (
@@ -52,7 +59,7 @@ router.use("/payment", (req, res, next) => {
       util.isNullOrUndefined(req.body.studentId) ||
       util.isInvalidId(req.body.studentId)
     ) {
-      res.status(400).send("Invalid Student Id");
+      res.status(400).send(INVALID_STUDENT_ID);
     }
   }
 
@@ -62,12 +69,12 @@ router.use("/payment", (req, res, next) => {
       util.isNullOrUndefined(req.body.paidFees) ||
       util.isNullOrUndefined(req.body.balanceFees)
     ) {
-      res.status(400).send("Invalid Fee Details");
+      res.status(400).send(INVALID_FEE_DETAILS);
     }
   }
 
   if (util.isInvalidAmount(req.body.amount)) {
-    res.status(400).send("Amount cannot be zero");
+    res.status(400).send(AMOUNT_CANNOT_BE_ZERO);
   }
 });
 
@@ -80,7 +87,7 @@ router.get("/income", (req, res) => {
 });
 
 router.use("/income/:id", (req, res, next) => {
-  if (util.isInvalidId(req.params.id)) res.status(400).send("Invalid Id");
+  if (util.isInvalidId(req.params.id)) res.status(400).send(INVALID_ID);
   else next();
 });
 
@@ -97,7 +104,7 @@ router.get("/expenses", (req, res) => {
 });
 
 router.use("/expense/:id", (req, res, next) => {
-  if (util.isInvalidId(req.params.id)) res.status(400).send("Invalid Id");
+  if (util.isInvalidId(req.params.id)) res.status(400).send(INVALID_ID);
   else next();
 });
 
