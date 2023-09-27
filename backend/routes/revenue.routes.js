@@ -4,7 +4,7 @@ const util = require("../utils/revenue.utils");
 
 var router = express.Router();
 let status = 0;
-let messsage = "";
+let message = "";
 let body = {};
 
 router.get("/", (req, res) => {
@@ -15,8 +15,26 @@ router.post("/add", (req, res) => {
   controller.addRevenueCategory(req, res);
 });
 
+router.use("/delete/:id", (req, res, next) => {
+  if (util.isInvalidId(req.params.id)) {
+    status = 400;
+    message = "Invalid ID";
+  }
+
+  util.respond(status, message, res, next);
+});
+
 router.delete("/delete/:id", (req, res) => {
   controller.deleteRevenueCategory(req, res);
+});
+
+router.use("/update/:id", (req, res, next) => {
+  if (util.isInvalidId(req.params.id)) {
+    status = 400;
+    message = "Invalid ID";
+  }
+
+  util.respond(status, message, res, next);
 });
 
 router.put("/update/:id", (req, res) => {
@@ -29,12 +47,12 @@ router.use("/payment", (req, res, next) => {
     util.isInvalidId(req.body.userId)
   ) {
     status = 400;
-    messsage = "Invalid User Id";
+    message = "Invalid User Id";
   }
 
   if (util.isInvalidId(req.body.revenueCategoryId)) {
     status = 400;
-    messsage = "Invalid Revenue Category Id";
+    message = "Invalid Revenue Category Id";
   }
 
   if (
@@ -48,7 +66,7 @@ router.use("/payment", (req, res, next) => {
       util.isInvalidId(req.body.studentId)
     ) {
       status = 400;
-      messsage = "Invalid Student Id";
+      message = "Invalid Student Id";
     }
   }
 
@@ -59,20 +77,16 @@ router.use("/payment", (req, res, next) => {
       util.isNullOrUndefined(req.body.balanceFees)
     ) {
       status = 400;
-      messsage = "Invalid Fee Details";
+      message = "Invalid Fee Details";
     }
   }
 
   if (util.isInvalidAmount(req.body.amount)) {
     status = 400;
-    messsage = "Amount cannot be zero";
+    message = "Amount cannot be zero";
   }
 
-  if (status !== 0 || messsage !== "") {
-    res.status(status).send(messsage);
-  } else {
-    next();
-  }
+  util.respond(status, message, res, next);
 });
 
 router.post("/payment", (req, res) => {
@@ -81,6 +95,15 @@ router.post("/payment", (req, res) => {
 
 router.get("/income", (req, res) => {
   controller.getAllIncomeDetils(req, res);
+});
+
+router.use("/income/:id", (req, res, next) => {
+  if (util.isInvalidId(req.params.id)) {
+    status = 400;
+    message = "Invalid ID";
+  }
+
+  util.respond(status, message, res, next);
 });
 
 router.get("/income/:id", (req, res) => {
@@ -93,6 +116,15 @@ router.post("/expense", (req, res) => {
 
 router.get("/expenses", (req, res) => {
   controller.getAllExpenseDetils(req, res);
+});
+
+router.use("/expense/:id", (req, res, next) => {
+  if (util.isInvalidId(req.params.id)) {
+    status = 400;
+    message = "Invalid ID";
+  }
+
+  util.respond(status, message, res, next);
 });
 
 router.get("/expense/:id", (req, res) => {
