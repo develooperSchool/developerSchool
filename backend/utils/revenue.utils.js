@@ -1,12 +1,18 @@
-const isNullOrUndefined = (field) => {
-  return field === null || field === undefined || field === "";
+const isNullOrUndefined = (input) => {
+  return input === null || input === undefined || input === "";
 };
 
-const isInvalidId = (field) => {
-  return parseInt(field) <= 0;
+const isInvalidId = (input) => {
+  return typeof input === "string" || parseInt(input) <= 0;
 };
 
 const isInvalidAmount = (amount) => {
   return parseInt(amount) <= 0;
 };
-module.exports = { isNullOrUndefined, isInvalidId, isInvalidAmount };
+
+const respond = (status, message, res, next) => {
+  if (status !== 0 || message !== "") res.status(status).send(message);
+  else next();
+};
+
+module.exports = { isNullOrUndefined, isInvalidId, isInvalidAmount, respond };
