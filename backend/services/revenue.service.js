@@ -3,7 +3,7 @@ const dao = require("../dao/revenue.dao");
 const getAllRevenueCategories = async () => {
   let rows = [];
   await dao
-    .getAllRevenueCategories() // calling getAllRevenueCategories from dao which returns all the revenue categories
+    .getAllRevenueCategories()
     .then((res) => {
       rows = res;
     })
@@ -78,7 +78,7 @@ const saveExpensePaymentDetails = async (body) => {
 const getAllIncomeDetils = async () => {
   let rows = [];
   await dao
-    .getAllIncomeDetils() // calling getAllRevenueCategories from dao which returns all the revenue categories
+    .getAllIncomeDetils()
     .then((res) => {
       rows = res;
     })
@@ -92,7 +92,7 @@ const getAllIncomeDetils = async () => {
 const getIncomeDetilsById = async (id) => {
   let rows = [];
   await dao
-    .getIncomeDetilsById(id) // calling getAllRevenueCategories from dao which returns all the revenue categories
+    .getIncomeDetilsById(id)
     .then((res) => {
       rows = res;
     })
@@ -106,7 +106,7 @@ const getIncomeDetilsById = async (id) => {
 const getAllExpenseDetils = async () => {
   let rows = [];
   await dao
-    .getAllExpenseDetils() // calling getAllRevenueCategories from dao which returns all the revenue categories
+    .getAllExpenseDetils()
     .then((res) => {
       rows = res;
     })
@@ -120,7 +120,7 @@ const getAllExpenseDetils = async () => {
 const getExpenseDetilsById = async (id) => {
   let rows = [];
   await dao
-    .getExpenseDetilsById(id) // calling getAllRevenueCategories from dao which returns all the revenue categories
+    .getExpenseDetilsById(id)
     .then((res) => {
       rows = res;
     })

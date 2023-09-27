@@ -1,16 +1,24 @@
 const db = require("../config/db-config");
 
 const getAllRevenueCategories = async () => {
-  let row = [];
+  let rowsAsArrays = [];
   try {
     const [rows, fields] = await db.query(
       "SELECT * FROM revenue_category order by id"
     );
-    row = rows;
+    const rowsAsObjects = rows.map((row) => {
+      const rowData = {};
+      for (const key in row) {
+        console.log(key);
+        rowData[key] = row[key];
+      }
+      return rowData;
+    });
+    console.log(rowsAsObjects);
   } catch (err) {
     console.error(err);
   }
-  return row;
+  return rowsAsArrays;
 };
 
 const addRevenueCategory = async (name) => {

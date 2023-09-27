@@ -4,7 +4,6 @@ const getAllRevenueCategories = (req, res) => {
   service
     .getAllRevenueCategories()
     .then((resp) => {
-      console.log(resp);
       res.status(200).send(resp);
     })
     .catch((err) => {
