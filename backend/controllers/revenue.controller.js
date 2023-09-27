@@ -102,7 +102,6 @@ const getAllExpenseDetils = (req, res) => {
   service
     .getAllExpenseDetils()
     .then((resp) => {
-      console.log(resp);
       res.status(200).send(resp);
     })
     .catch((err) => {
@@ -114,7 +113,6 @@ const getExpenseDetilsById = (req, res) => {
   service
     .getExpenseDetilsById(req.params.id)
     .then((resp) => {
-      console.log(resp[0].expense);
       res.status(200).send(resp);
     })
     .catch((err) => {
