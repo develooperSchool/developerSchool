@@ -5,6 +5,7 @@ const addRevenueCategory = async () => {
   try {
     const [rows, fields] = await db.query("SELECT * FROM revenue_category");
     row = rows;
+    console.log("fields", fields)
   } catch (err) {
     console.error(err);
   }

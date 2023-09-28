@@ -8,4 +8,5 @@ router.get("/", (req, res) => {
   controller.addRevenueCategory(req, res);
 });
 
+
 module.exports = router;
