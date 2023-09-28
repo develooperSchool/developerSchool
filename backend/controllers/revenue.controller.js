@@ -15,7 +15,6 @@ const addRevenueCategory = (req, res) => {
   service
     .addRevenueCategory(req.body.name)
     .then(() => {
-      // console.log(resp);
       res.status(200).send("ADDED SUCCESSFULLY");
     })
     .catch((err) => {
@@ -28,7 +27,6 @@ const deleteRevenueCategory = (req, res) => {
   service
     .deleteRevenueCategory(req.params.id)
     .then(() => {
-      // console.log(resp);
       res.status(200).send("DELETED SUCCESSFULLY");
     })
     .catch((err) => {
@@ -41,7 +39,6 @@ const udpateRevenueCategoryById = (req, res) => {
   service
     .udpateRevenueCategoryById(req.params.id, req.body.name)
     .then(() => {
-      // console.log(resp);
       res.status(200).send("UPDATE SUCCESSFULLY");
     })
     .catch((err) => {
@@ -53,7 +50,6 @@ const saveIncomePaymentDetails = (req, res) => {
   service
     .saveIncomePaymentDetails(req.body)
     .then(() => {
-      // console.log(resp);
       res.status(200).send("INCOME PAYMENT SUCCESSFUL");
     })
     .catch((err) => {
@@ -66,7 +62,6 @@ const saveExpensePaymentDetails = (req, res) => {
   service
     .saveExpensePaymentDetails(req.body)
     .then(() => {
-      // console.log(resp);
       res.status(200).send("EXPENSE PAYMENT SUCCESSFUL");
     })
     .catch((err) => {
@@ -78,7 +73,6 @@ const getAllIncomeDetils = (req, res) => {
   service
     .getAllIncomeDetils()
     .then((resp) => {
-      console.log(resp);
       res.status(200).send(resp);
     })
     .catch((err) => {
@@ -90,7 +84,6 @@ const getIncomeDetilsById = (req, res) => {
   service
     .getIncomeDetilsById(req.params.id)
     .then((resp) => {
-      console.log(resp);
       res.status(200).send(resp);
     })
     .catch((err) => {
