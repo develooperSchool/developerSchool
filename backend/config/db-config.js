@@ -6,6 +6,7 @@ const pool = mysql.createPool({
   user: "u904598717_dev_ds",
   password: "Dev_ds@123",
   database: "u904598717_dev_ds",
+  // nestTables: true,
   //   waitForConnections: true,
   //   connectionLimit: 10, // Adjust this based on your needs
   //   queueLimit: 0, // 0 means unlimited queue
