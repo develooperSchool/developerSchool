@@ -1,7 +1,8 @@
 var express= require('express');
 const mentorController= require("../controllers/mentor.controller");
-// const { router } = require('../app');
+const {check, validationResult} = require('express-validator') 
 
+// const { router } = require('../app');
 var router = express.Router();
 
 router.get('/allMentor', (req,res, next)=>{
@@ -14,7 +15,6 @@ router.get('/allMentor', (req,res, next)=>{
         console.log(err)
         console.log(res)
         res.send(res)
-
     })
     .catch((error) =>{
         res.send(error)
@@ -41,6 +41,7 @@ router.get('/allMentor', (req,res, next)=>{
 
 router.get("/mentors",(req,res)=>{
     mentorController.getAllMentors(req, res );
+
 });
 
 // post method 
@@ -63,6 +64,5 @@ router.put("/update/:id",(req,res)=>{
 router.delete("/delete/:id",(req,res)=>{
     mentorController.deleteMentorById(req,res);
 })
-
 
 module.exports= router;
