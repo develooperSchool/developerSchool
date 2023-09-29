@@ -25,7 +25,9 @@
 // }
 
 
-const service = require('../services/course.service')
+const { body, validationResult } = require('express-validator');
+const service = require('../services/course.service');
+const validater = require('../middleware/validate');
 
 
 
@@ -44,13 +46,25 @@ async function getAllCourses(req, res) {
     }
   }
 
-  const getCreatecourse = (req, res) => {
+  
+
+  const getCreatecourse = (req, res,next) => {
+
+   
+   
+      
+ 
+
+  
+
     console.log(req.body);
     service
       .getCreatecourse(req.body)
       .then(() => {
+      
         // console.log(resp);
         res.status(200).send("create");
+       
       })
       .catch((err) => {
         console.log(err);

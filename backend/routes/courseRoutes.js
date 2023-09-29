@@ -23,23 +23,12 @@ const { query } = require("express-validator");
 
  courseRouter.get('/:courseId', courseController.getCourseById);
 
- courseRouter.post("/add",(req, res) => {
-  
-  
+ courseRouter.post("/add",(req, res) => {courseController.getCreatecourse(req, res);
+});
 
-    courseController.getCreatecourse(req, res);
+  courseRouter.put("/update/:id", (req, res) => {courseController.udpateCourseById(req, res);});
 
-  
-
-  });
-
-  courseRouter.put("/update/:id", (req, res) => {
-    courseController.udpateCourseById(req, res);
-  });
-
-  courseRouter.delete("/delete/:id", (req, res) => {
-    courseController.deleteCourse(req, res);
-  });
+  courseRouter.delete("/delete/:id", (req, res) => {courseController.deleteCourse(req, res); });
   
 //  courseRouter.get("/",(req,res)=>{
 
