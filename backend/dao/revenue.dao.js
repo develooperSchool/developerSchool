@@ -62,7 +62,6 @@ const saveIncomePaymentDetails = async (body) => {
   let row = [],
     values = [];
   try {
-    // if (parseInt(revenueCategoryId) === 1) {
     values = [
       userId,
       studentId,
@@ -75,12 +74,6 @@ const saveIncomePaymentDetails = async (body) => {
     query =
       "INSERT INTO income (user_id, student_id, revenue_category_id, amount, total_fees, paid_fees, balance_fees) " +
       "VALUES(?, ?, ?, ?, ?, ?, ?)";
-    // } else {
-    //   values = [userId, revenueCategoryId, amount];
-    //   query =
-    //     "INSERT INTO income (user_id, revenue_category_id, amount) " +
-    //     "VALUES(?, ?, ?)";
-    // }
     const rows = db.query(query, values);
     console.log("result", rows);
     row = rows;
@@ -98,22 +91,14 @@ const saveExpensePaymentDetails = async (body) => {
   let values = [];
 
   try {
-    // if (parseInt(revenueCategoryId) === 5) {
     values = [revenueCategoryId, amount, mentorId, remark];
     query =
       "INSERT INTO expense (revenue_category_id, amount, mentor_id, remark)" +
       "VALUES(?, ?, ?, ?)";
-    // } else {
-    //   values = [revenueCategoryId, amount, remark];
-    //   query =
-    //     "INSERT INTO expense (revenue_category_id, amount, remark)" +
-    //     "VALUES(?, ?, ?)";
-    // }
     const rows = db.query(query, values, function (err, records, fields) {
       console.log(records);
       console.log(fields);
     });
-    // console.log("result", rows);
     row = rows;
   } catch (err) {
     console.error(err);
