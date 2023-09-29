@@ -19,8 +19,6 @@ router.post("/add", (req, res) => {
   controller.addRevenueCategory(req, res);
 });
 
-<<<<<<< HEAD
-=======
 router.use("/delete/:id", (req, res, next) => {
   if (util.isInvalidId(req.params.id)) res.status(400).send(INVALID_ID);
   else next();
@@ -113,6 +111,5 @@ router.use("/expense/:id", (req, res, next) => {
 router.get("/expense/:id", (req, res) => {
   controller.getExpenseDetilsById(req, res);
 });
->>>>>>> 69fe1df1cf529683d28044149463e5654adf9be7
 
 module.exports = router;
