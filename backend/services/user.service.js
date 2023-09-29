@@ -1,3 +1,4 @@
+// const { getUserById } = require("../controllers/user.controller");
 const dao = require("../dao/user.dao");
 const getAllUsers = async () => {
   let rows = [];
@@ -22,6 +23,15 @@ const addUser = async (body) => {
     });
 };
 
+const signin = async (body) => {
+  await dao
+    .signin(boby)
+    .then(() => {})
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 const deleteUser = async (user_id) => {
   await dao
     .deleteUser(user_id)
@@ -40,9 +50,39 @@ const updateUser = async (user_id, body) => {
     });
 };
 
+const getEmailById = async (email_id) => {
+  let result = [];
+  await dao
+    .getEmailById(email_id)
+    .then((res) => {
+      //console.log(res);
+      result = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return result;
+};
+
+const getUserById = async (user_id) => {
+  let result = [];
+  await dao
+    .getUserById(user_id)
+    .then((res) => {
+      result = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return result;
+};
+
 module.exports = {
   getAllUsers,
   addUser,
   deleteUser,
   updateUser,
+  getEmailById,
+  getUserById,
+  signin,
 };

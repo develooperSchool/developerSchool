@@ -46,9 +46,47 @@ const updateUser = (req, res) => {
     });
 };
 
+const getEmailById = (req, res) => {
+  console.log(req.query.email);
+  service
+    .getEmailById(req.query.email)
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const getUserById = (req, res) => {
+  console.log(req.params.id);
+  service
+    .getUserById(req.params.id)
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const signInUser = (req, res) => {
+  service
+    .signInUser(req, body)
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 module.exports = {
   getAllUsers,
   addUser,
   deleteUser,
   updateUser,
+  getEmailById,
+  getUserById,
+  signInUser,
 };
