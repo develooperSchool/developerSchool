@@ -1,6 +1,7 @@
 const db = require("../config/db-config");
 const ExpenseDetailsNotFoundError = require("../errors/ExpenseDetailsNotFoundError");
 const IncomeDetailsNotFoundError = require("../errors/IncomeDetailsNotFoundError");
+const RevenueCatogoryNotFoundError = require("../errors/RevenueCategoryNotFoundError");
 
 const getAllRevenueCategories = async () => {
   let row = [];
@@ -17,7 +18,7 @@ const addRevenueCategory = async (name) => {
   let row = [name];
   try {
     let query = "INSERT INTO revenue_category (name) VALUES(?)";
-    const [rows] = db.execute(query, row);
+    const [rows, fields] = await db.execute(query, row);
     console.log("result", rows);
   } catch (err) {
     console.error(err);
@@ -25,23 +26,30 @@ const addRevenueCategory = async (name) => {
   return row;
 };
 
-const deleteRevenueCategory = async (id) => {
-  let row = [id];
+const deleteRevenueCategory = async (req, res) => {
+  let id = req.params.id;
   try {
-    let query = "DELETE FROM  revenue_category WHERE id = ? ";
-    const rows = db.execute(query, row);
-    console.log("result", rows);
+    // let selectQuery = "SELECT * FROM revenue_category WHERE id = ? ";
+    // const selected = db.query(selectQuery, [id]);
+    // console.log();
+    let query = "DELETE FROM revenue_category WHERE id = ? ";
+    const [result, fields] = await db.query(query, [id]);
+    if (result.affectedRows == 0)
+      throw new RevenueCatogoryNotFoundError(
+        "REVENUE CATEGORY NOT FOUND FOR ID " + id,
+        res
+      );
   } catch (err) {
     console.error(err);
   }
-  return row;
+  // return row;
 };
 
 const udpateRevenueCategoryById = async (id, name) => {
   let row = [name, id];
   try {
     let query = "UPDATE revenue_category SET name = ? WHERE id = ?";
-    const rows = db.query(query, row);
+    const [rows, fields] = await db.query(query, row);
     console.log("result", rows);
   } catch (err) {
     console.error(err);
@@ -76,7 +84,7 @@ const saveIncomePaymentDetails = async (body) => {
     query =
       "INSERT INTO income (user_id, student_id, revenue_category_id, amount, total_fees, paid_fees, balance_fees) " +
       "VALUES(?, ?, ?, ?, ?, ?, ?)";
-    const rows = db.query(query, values);
+    const [rows, fields] = await db.query(query, values);
     console.log("result", rows);
     row = rows;
   } catch (err) {
@@ -97,10 +105,14 @@ const saveExpensePaymentDetails = async (body) => {
     query =
       "INSERT INTO expense (revenue_category_id, amount, mentor_id, remark)" +
       "VALUES(?, ?, ?, ?)";
-    const rows = db.query(query, values, function (err, records, fields) {
-      console.log(records);
-      console.log(fields);
-    });
+    const [rows, fields] = await db.query(
+      query,
+      values,
+      function (err, records, fields) {
+        console.log(records);
+        console.log(fields);
+      }
+    );
     row = rows;
   } catch (err) {
     console.error(err);

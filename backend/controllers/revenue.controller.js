@@ -25,7 +25,7 @@ const addRevenueCategory = (req, res) => {
 const deleteRevenueCategory = (req, res) => {
   console.log(req.params.id);
   service
-    .deleteRevenueCategory(req.params.id)
+    .deleteRevenueCategory(req, res)
     .then(() => {
       res.status(200).send("DELETED SUCCESSFULLY");
     })

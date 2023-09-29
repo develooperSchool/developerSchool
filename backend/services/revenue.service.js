@@ -27,10 +27,10 @@ const addRevenueCategory = async (name) => {
 
   // return rows;
 };
-const deleteRevenueCategory = async (id) => {
+const deleteRevenueCategory = async (req, res) => {
   // let rows = [];
   await dao
-    .deleteRevenueCategory(id)
+    .deleteRevenueCategory(req, res)
     .then(() => {
       // rows = res;
     })
