@@ -89,10 +89,10 @@ const getAllIncomeDetils = async () => {
   return rows;
 };
 
-const getIncomeDetilsById = async (id) => {
+const getIncomeDetilsById = async (req, res) => {
   let rows = [];
   await dao
-    .getIncomeDetilsById(id)
+    .getIncomeDetilsById(req, res)
     .then((res) => {
       rows = res;
     })
@@ -117,10 +117,10 @@ const getAllExpenseDetils = async () => {
   return rows;
 };
 
-const getExpenseDetilsById = async (id) => {
+const getExpenseDetilsById = async (req, res) => {
   let rows = [];
   await dao
-    .getExpenseDetilsById(id)
+    .getExpenseDetilsById(req, res)
     .then((res) => {
       rows = res;
     })

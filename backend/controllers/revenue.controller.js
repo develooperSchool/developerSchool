@@ -82,7 +82,7 @@ const getAllIncomeDetils = (req, res) => {
 
 const getIncomeDetilsById = (req, res) => {
   service
-    .getIncomeDetilsById(req.params.id)
+    .getIncomeDetilsById(req, res)
     .then((resp) => {
       res.status(200).send(resp);
     })
@@ -104,7 +104,7 @@ const getAllExpenseDetils = (req, res) => {
 
 const getExpenseDetilsById = (req, res) => {
   service
-    .getExpenseDetilsById(req.params.id)
+    .getExpenseDetilsById(req, res)
     .then((resp) => {
       res.status(200).send(resp);
     })

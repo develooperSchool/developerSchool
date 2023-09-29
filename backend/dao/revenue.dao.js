@@ -1,4 +1,6 @@
 const db = require("../config/db-config");
+const ExpenseDetailsNotFoundError = require("../errors/ExpenseDetailsNotFoundError");
+const IncomeDetailsNotFoundError = require("../errors/IncomeDetailsNotFoundError");
 
 const getAllRevenueCategories = async () => {
   let row = [];
@@ -119,15 +121,20 @@ const getAllIncomeDetils = async () => {
   return row;
 };
 
-const getIncomeDetilsById = async (id) => {
+const getIncomeDetilsById = async (req, res) => {
+  let id = req.params.id;
   let row = [];
-  let values = [id];
   try {
     const [rows, fields] = await db.query(
       "SELECT * FROM income WHERE income_id = ?",
-      values
+      [id]
     );
-    row = rows;
+    if (rows.length > 0) row = rows;
+    else
+      throw new IncomeDetailsNotFoundError(
+        "INCOME DETAILS NOT FOUND FOR ID " + id,
+        res
+      );
   } catch (err) {
     console.error(err);
   }
@@ -147,15 +154,20 @@ const getAllExpenseDetils = async () => {
   return row;
 };
 
-const getExpenseDetilsById = async (id) => {
+const getExpenseDetilsById = async (req, res) => {
   let row = [];
-  let values = [id];
+  let id = req.params.id;
   try {
     const [rows, fields] = await db.query(
       "SELECT * FROM expense WHERE expense_id = ?",
-      values
+      [id]
     );
-    row = rows;
+    if (rows.length > 0) row = rows;
+    else
+      throw new ExpenseDetailsNotFoundError(
+        "EXPENSE DETAILS NOT FOUND FOR ID " + id,
+        res
+      );
   } catch (err) {
     console.error(err);
   }
