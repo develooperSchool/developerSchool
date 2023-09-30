@@ -71,15 +71,37 @@ const addUser = async (body) => {
 };
 
 const signInUser = async (body) => {
+  let result = [];
   try {
     const { email_id, password } = body;
     const values = [email_id, password];
-    const query = "insert into user_profile (email_id, password) values (?,?)";
-    const rows = await db.execute(query, values);
+    const query =
+      "select * from user_profile where email_id = ? and password = ?";
+    const [rows, fields] = await db.execute(query, values);
     console.log(rows);
+    result = rows;
   } catch (err) {
     console.log(err);
   }
+  return result;
+};
+
+const checkEmail = async (body) => {
+  let row = [];
+  try {
+    const { email_id } = body;
+    let query = "SELECT * FROM user_profile where email_id = ?";
+
+    const values = [email_id];
+
+    const rows = await db.query(query, values);
+    console.log("result", rows);
+    // console.log("fields", fields);
+    row = rows[0];
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
 };
 
 const deleteUser = async (user_id) => {
@@ -174,4 +196,5 @@ module.exports = {
   getEmailById,
   getUserById,
   signInUser,
+  checkEmail,
 };

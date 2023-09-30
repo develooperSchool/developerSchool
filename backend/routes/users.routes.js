@@ -30,4 +30,8 @@ router.post("/signin", function (req, res) {
   controller.signInUser(req, res);
 });
 
+router.post("/checkEmail", function (req, res) {
+  controller.checkEmail(req, res);
+});
+
 module.exports = router;

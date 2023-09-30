@@ -1,5 +1,6 @@
 // const { getUserById } = require("../controllers/user.controller");
 const dao = require("../dao/user.dao");
+
 const getAllUsers = async () => {
   let rows = [];
   await dao
@@ -23,13 +24,38 @@ const addUser = async (body) => {
     });
 };
 
-const signin = async (body) => {
+const signInUser = async (body) => {
+  let message = "";
   await dao
-    .signin(boby)
-    .then(() => {})
+    .signInUser(body)
+    .then((res) => {
+      if (res.length > 0) message = "Login Success";
+      else {
+        message = "Invalid UserName";
+      }
+    })
     .catch((err) => {
       console.log(err);
     });
+
+  return message;
+};
+
+const checkEmail = async (body) => {
+  let msg = "";
+  await dao
+    .checkEmail(body)
+    .then((res) => {
+      if (res.length > 0) msg = "Email id already Exist";
+      else {
+        msg = "UNIQUE";
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return msg;
 };
 
 const deleteUser = async (user_id) => {
@@ -84,5 +110,6 @@ module.exports = {
   updateUser,
   getEmailById,
   getUserById,
-  signin,
+  signInUser,
+  checkEmail,
 };

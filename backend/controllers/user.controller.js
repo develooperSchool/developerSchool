@@ -72,7 +72,18 @@ const getUserById = (req, res) => {
 
 const signInUser = (req, res) => {
   service
-    .signInUser(req, body)
+    .signInUser(req.body)
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const checkEmail = (req, res) => {
+  service
+    .checkEmail(req.body)
     .then((resp) => {
       res.status(200).send(resp);
     })
@@ -89,4 +100,5 @@ module.exports = {
   getEmailById,
   getUserById,
   signInUser,
+  checkEmail,
 };
