@@ -25,7 +25,7 @@ const addRevenueCategory = (req, res) => {
 const deleteRevenueCategory = (req, res) => {
   console.log(req.params.id);
   service
-    .deleteRevenueCategory(req.params.id)
+    .deleteRevenueCategory(req, res)
     .then(() => {
       res.status(200).send("DELETED SUCCESSFULLY");
     })
@@ -82,7 +82,7 @@ const getAllIncomeDetils = (req, res) => {
 
 const getIncomeDetilsById = (req, res) => {
   service
-    .getIncomeDetilsById(req.params.id)
+    .getIncomeDetilsById(req, res)
     .then((resp) => {
       res.status(200).send(resp);
     })
@@ -104,7 +104,7 @@ const getAllExpenseDetils = (req, res) => {
 
 const getExpenseDetilsById = (req, res) => {
   service
-    .getExpenseDetilsById(req.params.id)
+    .getExpenseDetilsById(req, res)
     .then((resp) => {
       res.status(200).send(resp);
     })
