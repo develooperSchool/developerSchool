@@ -1,4 +1,4 @@
-const { REVENUE_CATEGORY_NOT_FOUND } = require("../utils/revenue.contants");
+const { REVENUE_CATEGORY_NOT_FOUND } = require("../utils/app.constants");
 const GlobalErrorHandler = require("./GlobalErrorHandler");
 const HttpStatusCode = require("../utils/HttpStatusCode");
 

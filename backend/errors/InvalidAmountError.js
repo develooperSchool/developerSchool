@@ -1,4 +1,4 @@
-const { AMOUNT_CANNOT_BE_ZERO } = require("../utils/revenue.contants");
+const { AMOUNT_CANNOT_BE_ZERO } = require("../utils/app.constants");
 const GlobalErrorHandler = require("./GlobalErrorHandler");
 const HttpStatusCode = require("../utils/HttpStatusCode");
 

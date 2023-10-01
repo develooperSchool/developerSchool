@@ -1,4 +1,4 @@
-const { INCOME_DETAILS_NOT_FOUND } = require("../utils/revenue.contants");
+const { INCOME_DETAILS_NOT_FOUND } = require("../utils/app.constants");
 const GlobalErrorHandler = require("./GlobalErrorHandler");
 const HttpStatusCode = require("../utils/HttpStatusCode");
 
