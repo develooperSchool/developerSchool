@@ -71,37 +71,15 @@ const addUser = async (body) => {
 };
 
 const signInUser = async (body) => {
-  let result = [];
   try {
     const { email_id, password } = body;
     const values = [email_id, password];
-    const query =
-      "select * from user_profile where email_id = ? and password = ?";
-    const [rows, fields] = await db.execute(query, values);
+    const query = "insert into user_profile (email_id, password) values (?,?)";
+    const rows = await db.execute(query, values);
     console.log(rows);
-    result = rows;
   } catch (err) {
     console.log(err);
   }
-  return result;
-};
-
-const checkEmail = async (body) => {
-  let row = [];
-  try {
-    const { email_id } = body;
-    let query = "SELECT * FROM user_profile where email_id = ?";
-
-    const values = [email_id];
-
-    const rows = await db.query(query, values);
-    console.log("result", rows);
-    // console.log("fields", fields);
-    row = rows[0];
-  } catch (err) {
-    console.log(err);
-  }
-  return row;
 };
 
 const deleteUser = async (user_id) => {
@@ -187,6 +165,27 @@ const getUserById = async (user_id) => {
   return row;
 };
 
+// reset password 
+const resetpassword = async (email_id, password) => {
+  let result = "";
+  try {
+    const values = [password, email_id];
+    let query = "update user_profile set password =? where email_id=?";
+    const [rows, fields] = await db.query(query, values);
+    if (rows.affectedRows > 0)
+      result = "password reset successfully";
+    else
+      result = "failed to reset password";
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(result)
+  return result;
+
+};
+
+
+
 module.exports = {
   getAllUsers,
   addUser,
@@ -196,5 +195,5 @@ module.exports = {
   getEmailById,
   getUserById,
   signInUser,
-  checkEmail,
+  resetpassword
 };

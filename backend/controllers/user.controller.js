@@ -72,7 +72,7 @@ const getUserById = (req, res) => {
 
 const signInUser = (req, res) => {
   service
-    .signInUser(req.body)
+    .signInUser(req, body)
     .then((resp) => {
       res.status(200).send(resp);
     })
@@ -81,16 +81,16 @@ const signInUser = (req, res) => {
     });
 };
 
-const checkEmail = (req, res) => {
-  service
-    .checkEmail(req.body)
-    .then((resp) => {
-      res.status(200).send(resp);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+const resetpassword=(req,res)=>{
+  const {email_id,password}=req.body
+  service.resetpassword(email_id,password)           
+   .then((resp)=>{
+    res .status(200).send({"message":resp});
+  }).catch((err)=>{
+    console.log(err)
+  })
+
+}
 
 module.exports = {
   getAllUsers,
@@ -100,5 +100,5 @@ module.exports = {
   getEmailById,
   getUserById,
   signInUser,
-  checkEmail,
+  resetpassword
 };

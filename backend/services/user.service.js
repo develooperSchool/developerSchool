@@ -1,6 +1,5 @@
 // const { getUserById } = require("../controllers/user.controller");
 const dao = require("../dao/user.dao");
-
 const getAllUsers = async () => {
   let rows = [];
   await dao
@@ -24,38 +23,13 @@ const addUser = async (body) => {
     });
 };
 
-const signInUser = async (body) => {
-  let message = "";
+const signin = async (body) => {
   await dao
-    .signInUser(body)
-    .then((res) => {
-      if (res.length > 0) message = "Login Success";
-      else {
-        message = "Invalid UserName";
-      }
-    })
+    .signin(boby)
+    .then(() => {})
     .catch((err) => {
       console.log(err);
     });
-
-  return message;
-};
-
-const checkEmail = async (body) => {
-  let msg = "";
-  await dao
-    .checkEmail(body)
-    .then((res) => {
-      if (res.length > 0) msg = "Email id already Exist";
-      else {
-        msg = "UNIQUE";
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  return msg;
 };
 
 const deleteUser = async (user_id) => {
@@ -103,6 +77,19 @@ const getUserById = async (user_id) => {
   return result;
 };
 
+const resetpassword= async(email_id,password)=>{
+  let result = "";
+  await dao.resetpassword(email_id,password)
+  .then((res)=>{
+    result=res;
+  })
+  .catch((error)=>{
+    console.log("enter valid email id ")
+  })
+  return result;
+}
+
+
 module.exports = {
   getAllUsers,
   addUser,
@@ -110,6 +97,6 @@ module.exports = {
   updateUser,
   getEmailById,
   getUserById,
-  signInUser,
-  checkEmail,
+  signin,
+  resetpassword
 };
