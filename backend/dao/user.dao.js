@@ -165,26 +165,39 @@ const getUserById = async (user_id) => {
   return row;
 };
 
-// reset password 
+// reset password
 const resetpassword = async (email_id, password) => {
   let result = "";
   try {
     const values = [password, email_id];
     let query = "update user_profile set password =? where email_id=?";
     const [rows, fields] = await db.query(query, values);
-    if (rows.affectedRows > 0)
-      result = "password reset successfully";
-    else
-      result = "failed to reset password";
+    if (rows.affectedRows > 0) result = "password reset successfully";
+    else result = "failed to reset password";
   } catch (err) {
     console.log(err);
   }
-  console.log(result)
+  console.log(result);
   return result;
-
 };
 
+const checkEmail = async (body) => {
+  let row = [];
+  try {
+    const { email_id } = body;
+    let query = "SELECT * FROM user_profile where email_id = ?";
 
+    const values = [email_id];
+
+    const rows = await db.query(query, values);
+    console.log("result", rows);
+    // console.log("fields", fields);
+    row = rows[0];
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
+};
 
 module.exports = {
   getAllUsers,
@@ -195,5 +208,6 @@ module.exports = {
   getUserByEmailId,
   getUserById,
   signInUser,
-  resetpassword
+  resetpassword,
+  checkEmail,
 };

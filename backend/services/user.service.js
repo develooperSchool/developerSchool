@@ -77,18 +77,35 @@ const getUserById = async (user_id) => {
   return result;
 };
 
-const resetpassword= async(email_id,password)=>{
+const resetpassword = async (email_id, password) => {
   let result = "";
-  await dao.resetpassword(email_id,password)
-  .then((res)=>{
-    result=res;
-  })
-  .catch((error)=>{
-    console.log("enter valid email id ")
-  })
+  await dao
+    .resetpassword(email_id, password)
+    .then((res) => {
+      result = res;
+    })
+    .catch((error) => {
+      console.log("enter valid email id ");
+    });
   return result;
-}
+};
 
+const checkEmail = async (body) => {
+  let msg = "";
+  await dao
+    .checkEmail(body)
+    .then((res) => {
+      if (res.length > 0) msg = "Email id already Exist";
+      else {
+        msg = "UNIQUE";
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return msg;
+};
 
 module.exports = {
   getAllUsers,
@@ -98,5 +115,6 @@ module.exports = {
   getUserByEmailId,
   getUserById,
   signin,
-  resetpassword
+  resetpassword,
+  checkEmail,
 };

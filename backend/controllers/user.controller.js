@@ -81,16 +81,28 @@ const signInUser = (req, res) => {
     });
 };
 
-const resetpassword=(req,res)=>{
-  const {email_id,password}=req.body
-  service.resetpassword(email_id,password)           
-   .then((resp)=>{
-    res .status(200).send({"message":resp});
-  }).catch((err)=>{
-    console.log(err)
-  })
+const resetpassword = (req, res) => {
+  const { email_id, password } = req.body;
+  service
+    .resetpassword(email_id, password)
+    .then((resp) => {
+      res.status(200).send({ message: resp });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-}
+const checkEmail = (req, res) => {
+  service
+    .checkEmail(req.body)
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 module.exports = {
   getAllUsers,
@@ -100,5 +112,6 @@ module.exports = {
   getUserByEmailId,
   getUserById,
   signInUser,
-  resetpassword
+  resetpassword,
+  checkEmail,
 };
