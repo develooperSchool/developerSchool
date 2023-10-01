@@ -5,6 +5,8 @@ const {check, validationResult} = require('express-validator')
 // const { router } = require('../app');
 var router = express.Router();
 
+const mentorValidation = require('../validation/mentor/mentor.validation')
+
 router.get('/allMentor', (req,res, next)=>{
 
     const query="select * from mentor_details"
@@ -45,14 +47,14 @@ router.get("/mentors",(req,res)=>{
 });
 
 // post method 
-router.post("/addMentor",(req,res)=>{
-    mentorController.addMentorController(req, res);
-    const {mentor_name}=req.body;
-    if(mentor_name==""){
-        res.status(400).send("invalid Enter name")
-    }
+router.post("/addMentor", mentorValidation.addMentorValidation,
+ mentorController.addMentorController );
+ 
+    // const {mentor_name}=req.body;
+    // if(mentor_name==""){
+    //     res.status(400).send("invalid Enter name")
+    // }
 
-})
 
 // update method 
 

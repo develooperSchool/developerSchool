@@ -5,6 +5,7 @@ const getAllMentors = async () => {
     try{
         const [rows,fields] =await db.query ("SELECT * FROM mentor_details");
         row=rows;
+        console.log("result: ", rows)
         console.log("fields: ", fields)
         // console.log(row)
     }catch(error){
@@ -18,7 +19,7 @@ const addMentor=async (body) =>{
     const values=[mentorName,roleId,courseId,userId]
     const query= "INSERT INTO mentor_details (mentor_name,role_id,course_id,user_id) values (?,?,?,?)";
 
-const rows = db.execute(query,values);
+const [rows,fields] = await db.execute(query,values);
 console.log(rows)
 };
 
