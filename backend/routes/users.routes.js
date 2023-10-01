@@ -30,4 +30,8 @@ router.post("/signin", function (req, res) {
   controller.signInUser(req, res);
 });
 
+router.patch("/resetpassword",(req,res)=>{
+controller.resetpassword(req,res)
+})
+
 module.exports = router;

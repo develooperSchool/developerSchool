@@ -165,6 +165,27 @@ const getUserById = async (user_id) => {
   return row;
 };
 
+// reset password 
+const resetpassword = async (email_id, password) => {
+  let result = "";
+  try {
+    const values = [password, email_id];
+    let query = "update user_profile set password =? where email_id=?";
+    const [rows, fields] = await db.query(query, values);
+    if (rows.affectedRows > 0)
+      result = "password reset successfully";
+    else
+      result = "failed to reset password";
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(result)
+  return result;
+
+};
+
+
+
 module.exports = {
   getAllUsers,
   addUser,
@@ -174,4 +195,5 @@ module.exports = {
   getEmailById,
   getUserById,
   signInUser,
+  resetpassword
 };

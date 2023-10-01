@@ -81,6 +81,17 @@ const signInUser = (req, res) => {
     });
 };
 
+const resetpassword=(req,res)=>{
+  const {email_id,password}=req.body
+  service.resetpassword(email_id,password)           
+   .then((resp)=>{
+    res .status(200).send({"message":resp});
+  }).catch((err)=>{
+    console.log(err)
+  })
+
+}
+
 module.exports = {
   getAllUsers,
   addUser,
@@ -89,4 +100,5 @@ module.exports = {
   getEmailById,
   getUserById,
   signInUser,
+  resetpassword
 };

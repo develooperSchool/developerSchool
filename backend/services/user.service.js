@@ -77,6 +77,19 @@ const getUserById = async (user_id) => {
   return result;
 };
 
+const resetpassword= async(email_id,password)=>{
+  let result = "";
+  await dao.resetpassword(email_id,password)
+  .then((res)=>{
+    result=res;
+  })
+  .catch((error)=>{
+    console.log("enter valid email id ")
+  })
+  return result;
+}
+
+
 module.exports = {
   getAllUsers,
   addUser,
@@ -85,4 +98,5 @@ module.exports = {
   getEmailById,
   getUserById,
   signin,
+  resetpassword
 };
