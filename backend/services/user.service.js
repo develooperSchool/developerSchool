@@ -50,10 +50,10 @@ const updateUser = async (user_id, body) => {
     });
 };
 
-const getEmailById = async (email_id) => {
+const getUserByEmailId = async (email_id) => {
   let result = [];
   await dao
-    .getEmailById(email_id)
+    .getUserByEmailId(email_id)
     .then((res) => {
       //console.log(res);
       result = res;
@@ -95,7 +95,7 @@ module.exports = {
   addUser,
   deleteUser,
   updateUser,
-  getEmailById,
+  getUserByEmailId,
   getUserById,
   signin,
   resetpassword

@@ -135,7 +135,7 @@ const updateUser = async (user_id, body) => {
   return row;
 };
 
-const getEmailById = async (email_id) => {
+const getUserByEmailId = async (email_id) => {
   let row = [];
   try {
     let query = "SELECT * FROM user_profile where email_id = ?";
@@ -192,7 +192,7 @@ module.exports = {
   add,
   deleteUser,
   updateUser,
-  getEmailById,
+  getUserByEmailId,
   getUserById,
   signInUser,
   resetpassword

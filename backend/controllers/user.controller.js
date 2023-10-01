@@ -46,10 +46,10 @@ const updateUser = (req, res) => {
     });
 };
 
-const getEmailById = (req, res) => {
+const getUserByEmailId = (req, res) => {
   console.log(req.query.email);
   service
-    .getEmailById(req.query.email)
+    .getUserByEmailId(req.query.email)
     .then((resp) => {
       res.status(200).send(resp);
     })
@@ -97,7 +97,7 @@ module.exports = {
   addUser,
   deleteUser,
   updateUser,
-  getEmailById,
+  getUserByEmailId,
   getUserById,
   signInUser,
   resetpassword
