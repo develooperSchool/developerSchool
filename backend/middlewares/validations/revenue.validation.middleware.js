@@ -1,7 +1,7 @@
-const util = require("../utils/revenue.utils");
-const InvalidIdError = require("../errors/InvalidIdError");
-const InvalidFeeDetailsError = require("../errors/InvalidFeeDetailsError");
-const InvalidAmountError = require("../errors/InvalidAmountError");
+const util = require("../../utils/app.utils");
+const InvalidIdError = require("../../errors/InvalidIdError");
+const InvalidFeeDetailsError = require("../../errors/InvalidFeeDetailsError");
+const InvalidAmountError = require("../../errors/InvalidAmountError");
 
 const deleteRevenueCategoryValidation = (req, res, next) => {
   if (util.isInvalidId(req.params.id))
