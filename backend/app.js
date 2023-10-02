@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var revenueRouter = require("./routes/revenue.routes");
-var curiculumRouter = require("./routes/curriculumRoutes");
+var curriculumRouter = require("./routes/curriculumRoutes")
 var courseRouter = require('./routes/courseRoutes');
 
 
@@ -27,7 +27,10 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 // curriculum Module
-app.use("/curiculum", curiculumRouter);
+app.use("/curriculum", curriculumRouter);
+
+
+// Course Module
 app.use("/course", courseRouter);
 
 

@@ -9,8 +9,8 @@
 
  const courseController = require("../controllers/course.controller");
 const { validationResult } = require("express-validator");
-const { query } = require("express-validator");
-
+const { body } = require("express-validator");
+const validateCourse = require("../middlewares/course.middleware")
 
 
 
@@ -23,12 +23,25 @@ const { query } = require("express-validator");
 
  courseRouter.get('/:courseId', courseController.getCourseById);
 
- courseRouter.post("/add",(req, res) => {courseController.getCreatecourse(req, res);
+ courseRouter.post("/add" ,
+ [body("course_name").isLength({min:3},{max:10}).withMessage("plz provide proper co(urseName")]
+// validateCourse
+  ,(req, res) => {
+    const error = validationResult(req)
+
+   if(!error.isEmpty()){
+    return res.status(400).json({error:error.array()})
+   }
+   else{
+    
+    courseController.getCreatecourse(req, res);
+   }
+
 });
 
-  courseRouter.put("/update/:id", (req, res) => {courseController.udpateCourseById(req, res);});
+  courseRouter.put("/update/:id",(req, res) => {courseController.udpateCourseById(req, res);});
 
-  courseRouter.delete("/delete/:id", (req, res) => {courseController.deleteCourse(req, res); });
+  courseRouter.delete("/delete/:id", (req, res) =>{courseController.deleteCourse(req, res); });
   
 //  courseRouter.get("/",(req,res)=>{
 

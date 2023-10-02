@@ -36,13 +36,13 @@ const pool = require("../config/db-config")
 
 
 
-// const mysql = require('mysql2/promise');
-// const dbConfig = {
-//   host: 'srv944.hstgr.io',
-//   user: 'u904598717_dev_ds',
-//   password: 'Dev_ds@123',
-//   database: 'u904598717_dev_ds',
-// };
+const mysql = require('mysql2/promise');
+const dbConfig = {
+  host: 'srv944.hstgr.io',
+  user: 'u904598717_dev_ds',
+  password: 'Dev_ds@123',
+  database: 'u904598717_dev_ds',
+};
 
 
 

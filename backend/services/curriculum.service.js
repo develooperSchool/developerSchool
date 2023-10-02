@@ -1,25 +1,28 @@
-const CurriculumDao = require('../dao/curriculum.dao');
+const { body } = require('express-validator');
+const dao  = require('../dao/curriculum.dao')
+
 
 class CurriculumService {
-  getAllCurriculumEntries(callback) {
-    CurriculumDao.getAllCurriculumEntries(callback);
-  }
+    async getAllCurriculum() {
+      return await dao.getAllCurriculum();
+    }
 
-  getCurriculumEntryById(id, callback) {
-    CurriculumDao.getCurriculumEntryById(id, callback);
-  }
+    async getCurriculumById(id) {
+        return await dao.getCurriculumById(id);
+      }
 
-  createCurriculumEntry(entry, callback) {
-    CurriculumDao.createCurriculumEntry(entry, callback);
-  }
+      async createCurriculum(body) {
+        return await dao.getCreateCurriculum(body);
+      }
 
-  updateCurriculumEntry(id, entry, callback) {
-    CurriculumDao.updateCurriculumEntry(id, entry, callback);
-  }
+      async updateCurriculum(id,body) {
+        return await dao.udpateCurriculumById(id,body);
+      }
 
-  deleteCurriculumEntry(id, callback) {
-    CurriculumDao.deleteCurriculumEntry(id, callback);
-  }
+      async deleteCurriculum(id) {
+        return await dao.deleteCurriculum(id);
+      }
+
 }
 
 module.exports = new CurriculumService();

@@ -1,12 +1,19 @@
 const express = require('express');
-const router = express.Router();
-const CurriculumController = require('../controllers/curriculum.controller');
 
-router.get('/', CurriculumController.getAllCurriculumEntries);
-// router.get('/:id', CurriculumController.getCurriculumEntryById);
-// router.post('/', CurriculumController.createCurriculumEntry);
-// router.put('/:id', CurriculumController.updateCurriculumEntry);
-// router.delete('/:id', CurriculumController.deleteCurriculumEntry);
+var curriculumRouter = express.Router()
 
-module.exports = router;
+var curriculumcontroller = require("../controllers/curriculum.controller") 
 
+
+curriculumRouter.get("/",curriculumcontroller.getAllCurriculum)
+
+ curriculumRouter.get('/:curriculumId',curriculumcontroller.getCurriculumById);
+
+curriculumRouter.post("/curriculumadd",(req, res) => {curriculumcontroller.getCreateCurriculum(req,res)});
+
+
+  curriculumRouter.put("/update/:id", (req, res) => {curriculumcontroller.udpateCurriculumById(req,res)});
+
+  curriculumRouter.delete("/delete/:id", (req, res) => {curriculumcontroller.deleteCurriculum(req,res) });
+
+module.exports = curriculumRouter
