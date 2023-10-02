@@ -53,13 +53,11 @@ const paymentValidation = (req, res, next) => {
       util.isNullOrUndefined(req.body.paidFees) ||
       util.isNullOrUndefined(req.body.balanceFees)
     ) {
-      // res.status(400).send(INVALID_FEE_DETAILS);
       throw new InvalidFeeDetailsError("FEE DETAILS MUST BE APPROPRIATE", res);
     }
   }
 
   if (util.isInvalidAmount(req.body.amount)) {
-    // res.status(400).send(AMOUNT_CANNOT_BE_ZERO);
     throw new InvalidAmountError("CAN'T MAKE PAYMENT WITH 0 AMOUNT", res);
   }
 
