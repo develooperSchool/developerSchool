@@ -1,11 +1,11 @@
-const { INVALID_ID } = require("../utils/app.constants");
+const { INVALID_FEE_DETAILS } = require("../utils/app.constants");
 const GlobalErrorHandler = require("./GlobalErrorHandler");
 const HttpStatusCode = require("../utils/HttpStatusCode");
 
-class InvalidId extends GlobalErrorHandler {
+class InvalidFeeDetailsError extends GlobalErrorHandler {
   constructor(description, res) {
     super(
-      INVALID_ID,
+      INVALID_FEE_DETAILS,
       HttpStatusCode.BAD_REQUEST,
       description,
       new Date(Date.now()),
@@ -14,4 +14,4 @@ class InvalidId extends GlobalErrorHandler {
   }
 }
 
-module.exports = InvalidId;
+module.exports = InvalidFeeDetailsError;
