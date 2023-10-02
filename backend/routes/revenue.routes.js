@@ -12,41 +12,33 @@ router.post("/add", (req, res) => {
   controller.addRevenueCategory(req, res);
 });
 
-router.use("/delete/:id", (req, res, next) => {
-  validation.deleteRevenueCategoryValidation(req, res, next);
-});
+router.delete(
+  "/delete/:id",
+  validation.deleteRevenueCategoryValidation,
+  controller.deleteRevenueCategory
+);
 
-router.delete("/delete/:id", (req, res) => {
-  controller.deleteRevenueCategory(req, res);
-});
+router.put(
+  "/update/:id",
+  validation.udpateRevenueCategoryByIdValidation,
+  controller.udpateRevenueCategoryById
+);
 
-router.use("/update/:id", (req, res, next) => {
-  validation.udpateRevenueCategoryByIdValidation(req, res, next);
-});
-
-router.put("/update/:id", (req, res) => {
-  controller.udpateRevenueCategoryById(req, res);
-});
-
-router.use("/payment", (req, res, next) => {
-  validation.paymentValidation(req, res, next);
-});
-
-router.post("/payment", (req, res) => {
-  controller.saveIncomePaymentDetails(req, res);
-});
+router.post(
+  "/payment",
+  validation.paymentValidation,
+  controller.saveIncomePaymentDetails
+);
 
 router.get("/income", (req, res) => {
   controller.getAllIncomeDetils(req, res);
 });
 
-router.use("/income/:id", (req, res, next) => {
-  validation.getIncomeDetilsByIdValidation(req, res, next);
-});
-
-router.get("/income/:id", (req, res) => {
-  controller.getIncomeDetilsById(req, res);
-});
+router.get(
+  "/income/:id",
+  validation.getIncomeDetilsByIdValidation,
+  controller.getIncomeDetilsById
+);
 
 router.post("/expense", (req, res) => {
   controller.saveExpensePaymentDetails(req, res);
@@ -56,12 +48,10 @@ router.get("/expenses", (req, res) => {
   controller.getAllExpenseDetils(req, res);
 });
 
-router.use("/expense/:id", (req, res, next) => {
-  validation.getExpenseDetilsByIdValidation(req, res, next);
-});
-
-router.get("/expense/:id", (req, res) => {
-  controller.getExpenseDetilsById(req, res);
-});
+router.get(
+  "/expense/:id",
+  validation.getExpenseDetilsByIdValidation,
+  controller.getExpenseDetilsById
+);
 
 module.exports = router;
