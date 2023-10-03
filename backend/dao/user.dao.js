@@ -33,30 +33,30 @@ const addUser = async (body) => {
   console.log(body);
   try {
     const {
-      first_name,
-      last_name,
-      email_id,
+      firstName,
+      lastName,
+      email,
       contact,
       address,
       qualification,
-      passing_year,
+      passingYear,
       dob,
       gender,
-      cast_category,
+      castCategory,
       subcast,
     } = body;
 
     const values = [
-      first_name,
-      last_name,
-      email_id,
+      firstName,
+      lastName,
+      email,
       contact,
       address,
       qualification,
-      passing_year,
+      passingYear,
       dob,
       gender,
-      cast_category,
+      castCategory,
       subcast,
     ];
 
@@ -71,23 +71,28 @@ const addUser = async (body) => {
 };
 
 const signInUser = async (body) => {
+  let row = [];
   try {
-    const { email_id, password } = body;
-    const values = [email_id, password];
-    const query = "insert into user_profile (email_id, password) values (?,?)";
+    const { email, password } = body;
+    const values = [email, password];
+    const query =
+      "select * from user_profile where email_id = ? and password =? ";
     const rows = await db.execute(query, values);
+    row = rows[0];
     console.log(rows);
   } catch (err) {
     console.log(err);
   }
+  return row;
 };
 
 const deleteUser = async (user_id) => {
   let row = [user_id];
   try {
     const query = "DELETE FROM user_profile WHERE user_id = ?";
-    const rows = await db.execute(query, row);
+    const [rows, fields] = await db.execute(query, row);
     console.log("result", rows);
+    row = rows;
   } catch (err) {
     console.log(err);
   }
@@ -127,8 +132,9 @@ const updateUser = async (user_id, body) => {
       subcast,
       user_id,
     ];
-    const rows = await db.query(query, values);
-    console.log("result", rows);
+    const [rows, fields] = await db.query(query, values);
+    // console.log("result", rows);
+    row = rows;
   } catch (err) {
     console.log(err);
   }
@@ -156,9 +162,9 @@ const getUserById = async (user_id) => {
   try {
     let query = "SELECT * FROM user_profile where user_id = ?";
     const values = [user_id];
-    const rows = await db.query(query, values);
-    console.log("result", rows);
-    row = rows[0];
+    const [rows, fields] = await db.query(query, values);
+    // console.log("result", rows);
+    row = rows;
   } catch (err) {
     console.log(err);
   }
@@ -184,13 +190,13 @@ const resetpassword = async (email_id, password) => {
 const checkEmail = async (body) => {
   let row = [];
   try {
-    const { email_id } = body;
+    const { email } = body;
     let query = "SELECT * FROM user_profile where email_id = ?";
 
-    const values = [email_id];
+    const values = [email];
 
     const rows = await db.query(query, values);
-    console.log("result", rows);
+    // console.log("result", rows);
     // console.log("fields", fields);
     row = rows[0];
   } catch (err) {

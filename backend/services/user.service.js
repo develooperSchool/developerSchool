@@ -23,31 +23,61 @@ const addUser = async (body) => {
     });
 };
 
-const signin = async (body) => {
+const signInUser = async (body) => {
+  let msg = "";
   await dao
-    .signin(boby)
-    .then(() => {})
+    .signInUser(body)
+    .then((resp) => {
+      if (resp.length > 0) msg = "Login Success";
+      else {
+        msg = "Login Failed";
+      }
+    })
     .catch((err) => {
       console.log(err);
     });
+  return msg;
 };
 
 const deleteUser = async (user_id) => {
+  let msg = "";
   await dao
     .deleteUser(user_id)
-    .then(() => {})
+    .then((resp) => {
+      console.log(resp.affectedRows);
+      if (resp.affectedRows > 0) msg = "Deleted Successfully";
+      else msg = "Not exist  user";
+    })
     .catch((err) => {
       console.log(err);
     });
+  return msg;
 };
 
 const updateUser = async (user_id, body) => {
+  let msg = "";
   await dao
-    .updateUser(user_id, body)
-    .then(() => {})
+    .getUserById(user_id)
+    .then(async (resp) => {
+      // if(resp)
+      if (resp.length > 0) {
+        await dao
+          .updateUser(user_id, body)
+          .then((response) => {
+            console.log("response", response);
+            if (response.affectedRows > 0) msg = "Updated Successfully";
+            else msg = "Not exist  user";
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else msg = "USER DOES NOT EXIST";
+    })
     .catch((err) => {
       console.log(err);
     });
+
+  return msg;
 };
 
 const getUserByEmailId = async (email_id) => {
@@ -95,6 +125,7 @@ const checkEmail = async (body) => {
   await dao
     .checkEmail(body)
     .then((res) => {
+      console.log(res.length);
       if (res.length > 0) msg = "Email id already Exist";
       else {
         msg = "UNIQUE";
@@ -114,7 +145,7 @@ module.exports = {
   updateUser,
   getUserByEmailId,
   getUserById,
-  signin,
+  signInUser,
   resetpassword,
   checkEmail,
 };

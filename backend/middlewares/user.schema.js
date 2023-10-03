@@ -6,10 +6,4 @@ const schema = {
   }),
 };
 
-// const schema = {
-//   user: joi.object({
-//     id: joi.string().min(3),
-//   }),
-// };
-
-module.exports = { schema };
+module.exports = schema;

@@ -26,8 +26,8 @@ const deleteUser = (req, res) => {
   console.log(req.params.id);
   service
     .deleteUser(req.params.id)
-    .then(() => {
-      res.status(200).send("DELETED SUCCESSFULLY");
+    .then((msg) => {
+      res.status(200).send(msg);
     })
     .catch((err) => {
       console.log(err);
@@ -38,8 +38,8 @@ const updateUser = (req, res) => {
   console.log(req.params.id, req.body);
   service
     .updateUser(req.params.id, req.body)
-    .then(() => {
-      res.status(200).send("UPDATED SUCCESSFULLY");
+    .then((msg) => {
+      res.status(200).send(msg);
     })
     .catch((err) => {
       console.log(err);
@@ -72,7 +72,7 @@ const getUserById = (req, res) => {
 
 const signInUser = (req, res) => {
   service
-    .signInUser(req, body)
+    .signInUser(req.body)
     .then((resp) => {
       res.status(200).send(resp);
     })
