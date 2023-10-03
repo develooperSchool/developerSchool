@@ -1,6 +1,7 @@
 var express= require('express');
 const mentorController= require("../controllers/mentor.controller");
-const {check, validationResult} = require('express-validator') 
+const {check, validationResult} = require('express-validator')
+const validation = require('../middlewares/validations/mentor.validations')
 
 // const { router } = require('../app');
 var router = express.Router();
@@ -64,7 +65,7 @@ router.put("/update/:id",(req,res)=>{
 
 // delete method 
 router.delete("/delete/:id",(req,res)=>{
-    mentorController.deleteMentorById(req,res);
-})
+    mentorController.deleteMentorById(req,res)
+});
 
 module.exports= router;
