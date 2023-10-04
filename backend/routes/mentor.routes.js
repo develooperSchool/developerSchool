@@ -43,7 +43,6 @@ router.get('/allMentor', (req, res, next) => {
 
 router.get("/mentors", (req, res) => {
     mentorController.getAllMentors(req, res);
-
 });
 
 // post method 

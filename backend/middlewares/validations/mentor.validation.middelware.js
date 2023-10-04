@@ -17,8 +17,8 @@ const getMentorByIdValidation = (req, res, next) => {
 }
 
 const addMentorValidation = (req,res,next) =>{
-if(util.isNullOrUndefined(req.body)){
-throw new MentorNameError("THE GIVEN MENTOR NAME IS INVALID")
+if(util.isNullOrUndefined(req.body.mentor_name)){
+throw new MentorNameError("THE GIVEN MENTOR NAME IS INVALID",res)
 }
 else next();
 }
