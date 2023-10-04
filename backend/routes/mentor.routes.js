@@ -47,9 +47,10 @@ router.get("/mentors", (req, res) => {
 });
 
 // post method 
-router.post("/addMentor", (req, res) => {
-    mentorController.addMentorController(req, res)
-})
+router.post("/addMentor", 
+    validation.addMentorValidation,
+    mentorController.addMentorController
+)
 
 // update method 
 
