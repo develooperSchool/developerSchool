@@ -2,6 +2,15 @@ const util = require("../../utils/app.utils");
 const InvalidIdError = require("../../errors/InvalidIdError");
 const InvalidFeeDetailsError = require("../../errors/InvalidFeeDetailsError");
 const InvalidAmountError = require("../../errors/InvalidAmountError");
+const InvalidRevenueCategoryError = require("../../errors/InvalidRevenueCategoryError");
+
+const addRevenueCategoryValidation = (req, res, next) => {
+  if (util.isNullOrUndefined(req.body.name))
+    throw new InvalidRevenueCategoryError(
+      "THE GIVEN REVENUE CATEGORY NAME IS INVALID",
+      res
+    );
+};
 
 const deleteRevenueCategoryValidation = (req, res, next) => {
   if (util.isInvalidId(req.params.id))
@@ -88,4 +97,5 @@ module.exports = {
   paymentValidation,
   getIncomeDetilsByIdValidation,
   getExpenseDetilsByIdValidation,
+  addRevenueCategoryValidation,
 };
