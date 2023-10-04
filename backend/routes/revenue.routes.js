@@ -4,13 +4,13 @@ const controller = require("../controllers/revenue.controller");
 
 var router = express.Router();
 
-router.get("/", (req, res) => {
-  controller.getAllRevenueCategories(req, res);
-});
+router.get("/", controller.getAllRevenueCategories);
 
-router.post("/add", (req, res) => {
-  controller.addRevenueCategory(req, res);
-});
+router.post(
+  "/add",
+  validation.addRevenueCategoryValidation,
+  controller.addRevenueCategory
+);
 
 router.delete(
   "/delete/:id",
@@ -40,13 +40,9 @@ router.get(
   controller.getIncomeDetilsById
 );
 
-router.post("/expense", (req, res) => {
-  controller.saveExpensePaymentDetails(req, res);
-});
+router.get("/expenses", controller.getAllExpenseDetils);
 
-router.get("/expenses", (req, res) => {
-  controller.getAllExpenseDetils(req, res);
-});
+router.post("/expense", controller.saveExpensePaymentDetails);
 
 router.get(
   "/expense/:id",
