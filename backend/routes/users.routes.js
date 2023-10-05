@@ -9,6 +9,26 @@ router.get("/", function (req, res) {
   controller.getAllUsers(req, res);
 });
 
+/*GET ALL ADMINS */
+router.get("/allAdmins", (req, res) => {
+  controller.getAllAdmins(req, res);
+});
+
+/*GET ALL MENTORS */
+router.get("/allMentors", (req, res) => {
+  controller.getAllMentors(req, res);
+});
+
+/*GET ALL GUEST */
+router.get("/allGuest", (req, res) => {
+  controller.getAllGuest(req, res);
+});
+
+/*GET ALL STUDENT */
+router.get("/allStudent", (req, res) => {
+  controller.getAllStudent(req, res);
+});
+
 /* GET USER BY EMAIL ID ---- WITH VALIDATION ---- */
 router.get(
   "/email",

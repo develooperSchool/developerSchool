@@ -11,6 +11,50 @@ const getAllUsers = (req, res) => {
     });
 };
 
+const getAllAdmins = (req, res) => {
+  service
+    .getAllAdmins()
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const getAllMentors = (req, res) => {
+  service
+    .getAllMentors()
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const getAllGuest = (req, res) => {
+  service
+    .getAllGuest()
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const getAllStudent = (req, res) => {
+  service
+    .getAllStudent()
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 const addUser = (req, res) => {
   service
     .addUser(req.body)
@@ -114,4 +158,8 @@ module.exports = {
   signInUser,
   resetpassword,
   checkEmail,
+  getAllAdmins,
+  getAllMentors,
+  getAllGuest,
+  getAllStudent,
 };

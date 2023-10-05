@@ -13,6 +13,50 @@ const getAllUsers = async () => {
   return row;
 };
 
+const getAllAdmins = async () => {
+  let row = [];
+  try {
+    const [rows] = await db.query("select * from user_profile where role_id=1");
+    row = rows;
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
+};
+
+const getAllMentors = async () => {
+  let row = [];
+  try {
+    const [rows] = await db.query("select * from user_profile where role_id=2");
+    row = rows;
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
+};
+
+const getAllGuest = async () => {
+  let row = [];
+  try {
+    const [rows] = await db.query("select * from user_profile where role_id=4");
+    row = rows;
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
+};
+
+const getAllStudent = async () => {
+  let row = [];
+  try {
+    const [rows] = await db.query("select * from user_profile where role_id=3");
+    row = rows;
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
+};
+
 const add = async (body) => {
   try {
     const { firstName, lastName } = body;
@@ -216,4 +260,8 @@ module.exports = {
   signInUser,
   resetpassword,
   checkEmail,
+  getAllAdmins,
+  getAllMentors,
+  getAllGuest,
+  getAllStudent,
 };

@@ -1,5 +1,6 @@
 // const { getUserById } = require("../controllers/user.controller");
 const dao = require("../dao/user.dao");
+
 const getAllUsers = async () => {
   let rows = [];
   await dao
@@ -12,6 +13,58 @@ const getAllUsers = async () => {
     });
 
   return rows;
+};
+
+const getAllAdmins = async () => {
+  let row = [];
+  await dao
+    .getAllAdmins()
+    .then((res) => {
+      row = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return row;
+};
+
+const getAllMentors = async () => {
+  let row = [];
+  await dao
+    .getAllMentors()
+    .then((res) => {
+      row = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return row;
+};
+
+const getAllGuest = async () => {
+  let row = [];
+  await dao
+    .getAllGuest()
+    .then((res) => {
+      row = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return row;
+};
+
+const getAllStudent = async () => {
+  let row = [];
+  await dao
+    .getAllStudent()
+    .then((res) => {
+      row = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return row;
 };
 
 const addUser = async (body) => {
@@ -148,4 +201,8 @@ module.exports = {
   signInUser,
   resetpassword,
   checkEmail,
+  getAllAdmins,
+  getAllMentors,
+  getAllGuest,
+  getAllStudent,
 };
