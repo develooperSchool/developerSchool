@@ -23,21 +23,6 @@ router.get('/allMentor', (req, res, next) => {
         });
 })
 
-// router.use("/mentor", (req, res, next) => {
-//     if(req.body.firstName){
-//         next();
-//     } else {
-//         res.send("firstname not found")
-//     }
-// })
-
-// router.use("/mentor", (req, res, next) => {
-//     if(req.body.lastName){
-//         next();
-//     } else {
-//         res.send("lastname not found")
-//     }
-// })
 
 // get method 
 
