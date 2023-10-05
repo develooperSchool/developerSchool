@@ -46,11 +46,10 @@ const udpateRevenueCategoryById = (req, res) => {
     });
 };
 const saveIncomePaymentDetails = (req, res) => {
-  console.log(req.body);
   service
-    .saveIncomePaymentDetails(req.body)
-    .then(() => {
-      res.status(200).send("INCOME PAYMENT SUCCESSFUL");
+    .saveIncomePaymentDetails(req, res)
+    .then((message) => {
+      res.status(200).send(message);
     })
     .catch((err) => {
       console.log(err);

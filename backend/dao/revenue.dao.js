@@ -54,7 +54,8 @@ const udpateRevenueCategoryById = async (id, name) => {
   return row;
 };
 
-const saveIncomePaymentDetails = async (body) => {
+const saveIncomePaymentDetails = async (req, res) => {
+  let message = "";
   const {
     userId,
     studentId,
@@ -63,13 +64,10 @@ const saveIncomePaymentDetails = async (body) => {
     totalFees,
     paidFees,
     balanceFees,
-  } = body;
+  } = req.body;
 
-  let query = "";
-  let row = [],
-    values = [];
   try {
-    values = [
+    let values = [
       userId,
       studentId,
       revenueCategoryId,
@@ -78,16 +76,17 @@ const saveIncomePaymentDetails = async (body) => {
       paidFees,
       balanceFees,
     ];
-    query =
+    let query =
       "INSERT INTO income (user_id, student_id, revenue_category_id, amount, total_fees, paid_fees, balance_fees) " +
       "VALUES(?, ?, ?, ?, ?, ?, ?)";
     const [rows, fields] = await db.query(query, values);
-    console.log("result", rows);
-    row = rows;
+    if (rows.affectedRows === 0)
+      throw new SaveExpenseError("COULD NOT SAVE INCOME DETIAILS", res);
+    else message = "SUCCESSFULLY SAVED INCOME DETAILS";
   } catch (err) {
     throw new SqlError(String(err.message).toUpperCase(), res);
   }
-  return row;
+  return message;
 };
 
 const saveExpensePaymentDetails = async (req, res) => {
@@ -104,7 +103,7 @@ const saveExpensePaymentDetails = async (req, res) => {
       "VALUES(?, ?, ?, ?)";
     const [rows, fields] = await db.query(query, values);
     if (rows.affectedRows === 0)
-      throw new SaveExpenseErro("COULD NOT SAVE EXPENSE DETIAILS", res);
+      throw new SaveExpenseError("COULD NOT SAVE EXPENSE DETIAILS", res);
     else message = "SUCCESSFULLY SAVED EXPENSE DETAILS";
   } catch (err) {
     throw new SqlError(String(err.message).toUpperCase(), res);
