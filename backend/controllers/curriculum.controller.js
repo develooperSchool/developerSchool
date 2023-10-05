@@ -9,8 +9,8 @@ async function getAllCurriculum(req, res) {
   }
 
   async function getCurriculumById(req, res) {
-    const { topic_id } = req.params;
-    const curriculum = await curriculumService.getCurriculumById(topic_id);
+    const { curriculumId } = req.params;
+    const curriculum = await curriculumService.getCurriculumById(curriculumId);
     if (!curriculum) {
       res.status(404).json({ error: "Course not found" });
     } else {

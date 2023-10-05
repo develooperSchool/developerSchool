@@ -19,7 +19,7 @@ async function getAllCurriculum() {
 
   async function getCurriculumById(Id) {
     const connection = await mysql.createConnection(dbConfig);
-    const [rows] = await connection.execute('SELECT * FROM curriculum WHERE topic_id = ?', [Id]);
+    const [rows] = await connection.execute('SELECT * FROM curriculum WHERE subject_id = ?', [Id]);
     connection.end();
     return rows[0];
   }
@@ -54,7 +54,7 @@ async function getAllCurriculum() {
     const {course_subject} = body;
     let row = [course_subject,id];
     try {
-      let query = "UPDATE curriculum SET course_subject = ? WHERE topic_id = ?";
+      let query = "UPDATE curriculum SET course_subject = ? WHERE subject_id = ?";
       const rows = pool.query(query, row);
       console.log("result", rows);
     } catch (err) {
@@ -67,7 +67,7 @@ async function getAllCurriculum() {
     let row = [id];
     console.log(row)
     try {
-      let query = "DELETE FROM curriculum WHERE topic_id = ? ";
+      let query = "DELETE FROM curriculum WHERE subject_id = ? ";
       const rows = pool.execute(query, row);
       console.log("result", rows);
     } catch (err) {

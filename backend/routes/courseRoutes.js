@@ -1,51 +1,33 @@
- var express = require("express")
-
- 
-//  import { body , validationResult } from 'express-validator'
-
-//  const validation = express.validation('express-validator')
-
-//  const pool = require("../config/db-config")
-
- const courseController = require("../controllers/course.controller");
+var express = require("express");
+const courseValidation = require("../middlewares/validations/course.validation.middleware");
+const courseController = require("../controllers/course.controller");
 const { validationResult } = require("express-validator");
 const { body } = require("express-validator");
-const validateCourse = require("../middlewares/course.middleware")
+const validateCourse = require("../middlewares/course.middleware");
 
+var courseRouter = express.Router();
 
+courseRouter.get("/", courseController.getAllCourses);
 
+courseRouter.get(
+  "/:courseId",
+  courseValidation.getCourseByIdValidation,
+  courseController.getCourseById
+);
 
-
- var courseRouter = express.Router()
-
-
- courseRouter.get("/",courseController.getAllCourses)
-
- courseRouter.get('/:courseId', courseController.getCourseById);
-
- courseRouter.post("/add" ,
- [body("course_name").isLength({min:3},{max:10}).withMessage("plz provide proper co(urseName")]
-// validateCourse
-  ,(req, res) => {
-    const error = validationResult(req)
-
-   if(!error.isEmpty()){
-    return res.status(400).json({error:error.array()})
-   }
-   else{
-    
-    courseController.getCreatecourse(req, res);
-   }
-
+courseRouter.post("/add", (req, res) => {
+  courseController.getCreatecourse(req, res);
 });
 
-  courseRouter.put("/update/:id",(req, res) => {courseController.udpateCourseById(req, res);});
+courseRouter.put("/update/:id", (req, res) => {
+  courseController.udpateCourseById(req, res);
+});
 
-  courseRouter.delete("/delete/:id", (req, res) =>{courseController.deleteCourse(req, res); });
-  
+courseRouter.delete("/delete/:id", (req, res) => {
+  courseController.deleteCourse(req, res);
+});
+
 //  courseRouter.get("/",(req,res)=>{
-
-   
 
 //     const quary = "select * from courses"
 
@@ -56,17 +38,16 @@ const validateCourse = require("../middlewares/course.middleware")
 //     .catch((error) => {
 //         res.send(error)
 //     });
-    
-    // pool.execute(quary, (err, result) => {
-    //     if(err) {
-    //         res.send(err);
-    //     } else{
-    //         res.send(result)
-    //     }
-    // })
+
+// pool.execute(quary, (err, result) => {
+//     if(err) {
+//         res.send(err);
+//     } else{
+//         res.send(result)
+//     }
+// })
 
 //  })
-
 
 //  courseRouter.post("/addcourse",(req,res)=>{
 
@@ -88,7 +69,6 @@ const validateCourse = require("../middlewares/course.middleware")
 //     })
 //  })
 
-
 //  courseRouter.put('/update/:courseId', (req, res) => {
 
 //   res.status(200).json({
@@ -104,6 +84,4 @@ const validateCourse = require("../middlewares/course.middleware")
 
 // courseRouter.put("/update/:course_id",course.update)
 
-
- module.exports=courseRouter
- 
+module.exports = courseRouter;

@@ -4,10 +4,14 @@ var curriculumRouter = express.Router()
 
 var curriculumcontroller = require("../controllers/curriculum.controller") 
 
+var curriculumValidation = require('../middlewares/validations/curriculum.validation.middleware')
+
 
 curriculumRouter.get("/",curriculumcontroller.getAllCurriculum)
 
- curriculumRouter.get('/:curriculumId',curriculumcontroller.getCurriculumById);
+ curriculumRouter.get('/:curriculumId',
+ curriculumValidation.getCurriculumByIdValidation,
+ curriculumcontroller.getCurriculumById);
 
 curriculumRouter.post("/curriculumadd",(req, res) => {curriculumcontroller.getCreateCurriculum(req,res)});
 
