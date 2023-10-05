@@ -1,4 +1,4 @@
-const { INVALID_ADDRESS } = require("../utils/revenue.contants");
+const { INVALID_ADDRESS } = require("../utils/app.constants");
 const GlobalErrorHandler = require("./GlobalErrorHandler");
 const HttpStatusCode = require("../utils/HttpStatusCode");
 

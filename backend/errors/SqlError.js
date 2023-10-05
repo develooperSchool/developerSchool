@@ -1,12 +1,12 @@
-const { INVALID_GENDER } = require("../utils/app.constants");
+const { SQL_ERROR } = require("../utils/app.constants");
 const GlobalErrorHandler = require("./GlobalErrorHandler");
 const HttpStatusCode = require("../utils/HttpStatusCode");
 
-class InvalidGenderError extends GlobalErrorHandler {
+class SqlError extends GlobalErrorHandler {
   constructor(description, res) {
     super(
-      INVALID_GENDER,
-      HttpStatusCode.BAD_REQUEST,
+      SQL_ERROR,
+      HttpStatusCode.INTERNAL_SERVER_ERROR,
       description,
       new Date(Date.now()),
       res
@@ -14,4 +14,4 @@ class InvalidGenderError extends GlobalErrorHandler {
   }
 }
 
-module.exports = InvalidGenderError;
+module.exports = SqlError;

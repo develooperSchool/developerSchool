@@ -51,34 +51,36 @@ const udpateRevenueCategoryById = async (id, name) => {
     });
 };
 
-const saveIncomePaymentDetails = async (body) => {
-  // let rows = [];
+const saveIncomePaymentDetails = async (req, res) => {
+  let message = "";
   await dao
-    .saveIncomePaymentDetails(body)
-    .then(() => {
-      // rows = res;
+    .saveIncomePaymentDetails(req, res)
+    .then((msg) => {
+      message = msg;
     })
     .catch((err) => {
       console.log(err);
     });
+  return message;
 };
 
-const saveExpensePaymentDetails = async (body) => {
-  // let rows = [];
+const saveExpensePaymentDetails = async (req, res) => {
+  let message = "";
   await dao
-    .saveExpensePaymentDetails(body)
-    .then(() => {
-      // rows = res;
+    .saveExpensePaymentDetails(req, res)
+    .then((msg) => {
+      message = msg;
     })
     .catch((err) => {
       console.log(err);
     });
+  return message;
 };
 
-const getAllIncomeDetils = async () => {
+const getAllIncomeDetils = async (res) => {
   let rows = [];
   await dao
-    .getAllIncomeDetils()
+    .getAllIncomeDetils(res)
     .then((res) => {
       rows = res;
     })
@@ -103,10 +105,10 @@ const getIncomeDetilsById = async (req, res) => {
   return rows;
 };
 
-const getAllExpenseDetils = async () => {
+const getAllExpenseDetils = async (res) => {
   let rows = [];
   await dao
-    .getAllExpenseDetils()
+    .getAllExpenseDetils(res)
     .then((res) => {
       rows = res;
     })
