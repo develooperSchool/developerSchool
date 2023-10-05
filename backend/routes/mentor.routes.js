@@ -23,7 +23,6 @@ router.get('/allMentor', (req, res, next) => {
         });
 })
 
-
 // get method 
 
 router.get("/mentors", (req, res) => {
@@ -38,9 +37,10 @@ router.post("/addMentor",
 
 // update method 
 
-router.put("/update/:id", (req, res) => {
-    mentorController.updateMentor(req, res);
-})
+router.put("/update/:id",
+ validation.updateMentorValidation,
+    mentorController.updateMentor
+)
 
 // delete method 
 router.delete("/delete/:id",

@@ -23,4 +23,11 @@ throw new InvalidNameError("THE GIVEN MENTOR NAME IS INVALID",res)
 else next();
 }
 
-module.exports = { deleteMentorByIdValidation, addMentorValidation };
+const updateMentorValidation = (req,res,next) =>{
+    if(util.isInvalidId(req.params.id)){
+     throw new InvalidIdError("ID GIVEN TO UPDATE MENTOR IS INVALID",res)
+    }
+    else next();
+}
+
+module.exports = { deleteMentorByIdValidation, addMentorValidation, updateMentorValidation };
