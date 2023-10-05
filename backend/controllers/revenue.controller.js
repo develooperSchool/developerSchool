@@ -46,11 +46,10 @@ const udpateRevenueCategoryById = (req, res) => {
     });
 };
 const saveIncomePaymentDetails = (req, res) => {
-  console.log(req.body);
   service
-    .saveIncomePaymentDetails(req.body)
-    .then(() => {
-      res.status(200).send("INCOME PAYMENT SUCCESSFUL");
+    .saveIncomePaymentDetails(req, res)
+    .then((message) => {
+      res.status(200).send(message);
     })
     .catch((err) => {
       console.log(err);
@@ -58,9 +57,8 @@ const saveIncomePaymentDetails = (req, res) => {
 };
 
 const saveExpensePaymentDetails = (req, res) => {
-  console.log(req.body);
   service
-    .saveExpensePaymentDetails(req.body)
+    .saveExpensePaymentDetails(req, res)
     .then(() => {
       res.status(200).send("EXPENSE PAYMENT SUCCESSFUL");
     })
@@ -71,7 +69,7 @@ const saveExpensePaymentDetails = (req, res) => {
 
 const getAllIncomeDetils = (req, res) => {
   service
-    .getAllIncomeDetils()
+    .getAllIncomeDetils(res)
     .then((resp) => {
       res.status(200).send(resp);
     })

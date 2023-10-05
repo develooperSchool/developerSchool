@@ -51,16 +51,17 @@ const udpateRevenueCategoryById = async (id, name) => {
     });
 };
 
-const saveIncomePaymentDetails = async (body) => {
-  // let rows = [];
+const saveIncomePaymentDetails = async (req, res) => {
+  let message = "";
   await dao
-    .saveIncomePaymentDetails(body)
-    .then(() => {
-      // rows = res;
+    .saveIncomePaymentDetails(req, res)
+    .then((msg) => {
+      message = msg;
     })
     .catch((err) => {
       console.log(err);
     });
+  return message;
 };
 
 const saveExpensePaymentDetails = async (req, res) => {
@@ -76,10 +77,10 @@ const saveExpensePaymentDetails = async (req, res) => {
   return message;
 };
 
-const getAllIncomeDetils = async () => {
+const getAllIncomeDetils = async (res) => {
   let rows = [];
   await dao
-    .getAllIncomeDetils()
+    .getAllIncomeDetils(res)
     .then((res) => {
       rows = res;
     })

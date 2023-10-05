@@ -10,7 +10,7 @@ const getAllRevenueCategories = async () => {
     const [rows] = await db.query("SELECT * FROM revenue_category order by id");
     row = rows;
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
@@ -22,7 +22,7 @@ const addRevenueCategory = async (name) => {
     const [rows, fields] = await db.execute(query, row);
     console.log("result", rows);
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
@@ -30,9 +30,6 @@ const addRevenueCategory = async (name) => {
 const deleteRevenueCategory = async (req, res) => {
   let id = req.params.id;
   try {
-    // let selectQuery = "SELECT * FROM revenue_category WHERE id = ? ";
-    // const selected = db.query(selectQuery, [id]);
-    // console.log();
     let query = "DELETE FROM revenue_category WHERE id = ? ";
     const [result, fields] = await db.query(query, [id]);
     if (result.affectedRows == 0)
@@ -41,9 +38,8 @@ const deleteRevenueCategory = async (req, res) => {
         res
       );
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
-  // return row;
 };
 
 const udpateRevenueCategoryById = async (id, name) => {
@@ -53,12 +49,13 @@ const udpateRevenueCategoryById = async (id, name) => {
     const [rows, fields] = await db.query(query, row);
     console.log("result", rows);
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
 
-const saveIncomePaymentDetails = async (body) => {
+const saveIncomePaymentDetails = async (req, res) => {
+  let message = "";
   const {
     userId,
     studentId,
@@ -67,13 +64,10 @@ const saveIncomePaymentDetails = async (body) => {
     totalFees,
     paidFees,
     balanceFees,
-  } = body;
+  } = req.body;
 
-  let query = "";
-  let row = [],
-    values = [];
   try {
-    values = [
+    let values = [
       userId,
       studentId,
       revenueCategoryId,
@@ -82,16 +76,17 @@ const saveIncomePaymentDetails = async (body) => {
       paidFees,
       balanceFees,
     ];
-    query =
+    let query =
       "INSERT INTO income (user_id, student_id, revenue_category_id, amount, total_fees, paid_fees, balance_fees) " +
       "VALUES(?, ?, ?, ?, ?, ?, ?)";
     const [rows, fields] = await db.query(query, values);
-    console.log("result", rows);
-    row = rows;
+    if (rows.affectedRows === 0)
+      throw new SaveExpenseError("COULD NOT SAVE INCOME DETIAILS", res);
+    else message = "SUCCESSFULLY SAVED INCOME DETAILS";
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
-  return row;
+  return message;
 };
 
 const saveExpensePaymentDetails = async (req, res) => {
@@ -108,17 +103,15 @@ const saveExpensePaymentDetails = async (req, res) => {
       "VALUES(?, ?, ?, ?)";
     const [rows, fields] = await db.query(query, values);
     if (rows.affectedRows === 0)
-      throw new SaveExpenseErro("COULD NOT SAVE EXPENSE DETIAILS", res);
+      throw new SaveExpenseError("COULD NOT SAVE EXPENSE DETIAILS", res);
     else message = "SUCCESSFULLY SAVED EXPENSE DETAILS";
   } catch (err) {
-    console.error(err);
-    message =
-      "ERROR OCCURED WHILE SAVING EXPENSE DETAILS WITH MESSAGE: " + err.message;
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return message;
 };
 
-const getAllIncomeDetils = async () => {
+const getAllIncomeDetils = async (res) => {
   let row = [];
   try {
     const [rows, fields] = await db.query(
@@ -126,7 +119,7 @@ const getAllIncomeDetils = async () => {
     );
     row = rows;
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
@@ -146,7 +139,7 @@ const getIncomeDetilsById = async (req, res) => {
         res
       );
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
@@ -179,7 +172,7 @@ const getExpenseDetilsById = async (req, res) => {
         res
       );
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
