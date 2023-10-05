@@ -1,4 +1,7 @@
 const service = require("../services/revenue.service");
+const HttpStatusCode = require("../utils/HttpStatusCode");
+const { respond } = require("../utils/app.utils");
+const { SUCCESS } = require("../utils/app.constants");
 
 const getAllRevenueCategories = (req, res) => {
   service
@@ -49,7 +52,7 @@ const saveIncomePaymentDetails = (req, res) => {
   service
     .saveIncomePaymentDetails(req, res)
     .then((message) => {
-      res.status(200).send(message);
+      respond(SUCCESS, HttpStatusCode.OK, message, new Date(Date.now()), res);
     })
     .catch((err) => {
       console.log(err);
@@ -70,8 +73,8 @@ const saveExpensePaymentDetails = (req, res) => {
 const getAllIncomeDetils = (req, res) => {
   service
     .getAllIncomeDetils(res)
-    .then((resp) => {
-      res.status(200).send(resp);
+    .then((response) => {
+      respond(SUCCESS, HttpStatusCode.OK, response, new Date(Date.now()), res);
     })
     .catch((err) => {
       console.log(err);
