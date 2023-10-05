@@ -76,10 +76,10 @@ const saveExpensePaymentDetails = async (req, res) => {
   return message;
 };
 
-const getAllIncomeDetils = async () => {
+const getAllIncomeDetils = async (res) => {
   let rows = [];
   await dao
-    .getAllIncomeDetils()
+    .getAllIncomeDetils(res)
     .then((res) => {
       rows = res;
     })

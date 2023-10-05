@@ -112,7 +112,7 @@ const saveExpensePaymentDetails = async (req, res) => {
   return message;
 };
 
-const getAllIncomeDetils = async () => {
+const getAllIncomeDetils = async (res) => {
   let row = [];
   try {
     const [rows, fields] = await db.query(

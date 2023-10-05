@@ -71,7 +71,7 @@ const saveExpensePaymentDetails = (req, res) => {
 
 const getAllIncomeDetils = (req, res) => {
   service
-    .getAllIncomeDetils()
+    .getAllIncomeDetils(res)
     .then((resp) => {
       res.status(200).send(resp);
     })
