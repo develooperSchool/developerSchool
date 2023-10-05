@@ -10,7 +10,7 @@ const getAllRevenueCategories = async () => {
     const [rows] = await db.query("SELECT * FROM revenue_category order by id");
     row = rows;
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
@@ -22,7 +22,7 @@ const addRevenueCategory = async (name) => {
     const [rows, fields] = await db.execute(query, row);
     console.log("result", rows);
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
@@ -30,9 +30,6 @@ const addRevenueCategory = async (name) => {
 const deleteRevenueCategory = async (req, res) => {
   let id = req.params.id;
   try {
-    // let selectQuery = "SELECT * FROM revenue_category WHERE id = ? ";
-    // const selected = db.query(selectQuery, [id]);
-    // console.log();
     let query = "DELETE FROM revenue_category WHERE id = ? ";
     const [result, fields] = await db.query(query, [id]);
     if (result.affectedRows == 0)
@@ -41,9 +38,8 @@ const deleteRevenueCategory = async (req, res) => {
         res
       );
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
-  // return row;
 };
 
 const udpateRevenueCategoryById = async (id, name) => {
@@ -53,7 +49,7 @@ const udpateRevenueCategoryById = async (id, name) => {
     const [rows, fields] = await db.query(query, row);
     console.log("result", rows);
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
@@ -89,7 +85,7 @@ const saveIncomePaymentDetails = async (body) => {
     console.log("result", rows);
     row = rows;
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
@@ -111,9 +107,7 @@ const saveExpensePaymentDetails = async (req, res) => {
       throw new SaveExpenseErro("COULD NOT SAVE EXPENSE DETIAILS", res);
     else message = "SUCCESSFULLY SAVED EXPENSE DETAILS";
   } catch (err) {
-    console.error(err);
-    message =
-      "ERROR OCCURED WHILE SAVING EXPENSE DETAILS WITH MESSAGE: " + err.message;
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return message;
 };
@@ -126,7 +120,7 @@ const getAllIncomeDetils = async () => {
     );
     row = rows;
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
@@ -146,7 +140,7 @@ const getIncomeDetilsById = async (req, res) => {
         res
       );
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
@@ -179,7 +173,7 @@ const getExpenseDetilsById = async (req, res) => {
         res
       );
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
