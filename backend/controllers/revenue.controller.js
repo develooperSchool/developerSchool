@@ -58,9 +58,8 @@ const saveIncomePaymentDetails = (req, res) => {
 };
 
 const saveExpensePaymentDetails = (req, res) => {
-  console.log(req.body);
   service
-    .saveExpensePaymentDetails(req.body)
+    .saveExpensePaymentDetails(req, res)
     .then(() => {
       res.status(200).send("EXPENSE PAYMENT SUCCESSFUL");
     })
