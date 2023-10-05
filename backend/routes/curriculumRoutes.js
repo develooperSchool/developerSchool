@@ -10,7 +10,7 @@ var curriculumValidation = require('../middlewares/validations/curriculum.valida
 curriculumRouter.get("/",curriculumcontroller.getAllCurriculum)
 
  curriculumRouter.get('/:curriculumId',
- curriculumValidation.getCurriculumByIdValidation,
+ curriculumValidation.getCurriculumByIdValidation,  
  curriculumcontroller.getCurriculumById);
 
 curriculumRouter.post("/curriculumadd",(req, res) => {curriculumcontroller.getCreateCurriculum(req,res)});
