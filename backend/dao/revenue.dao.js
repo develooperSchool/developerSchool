@@ -155,7 +155,7 @@ const getAllExpenseDetils = async (res) => {
   let row = [];
   try {
     const [rows, fields] = await db.query(
-      "SELECT * FROM expense ORDER BY expense_id123"
+      "SELECT * FROM expense ORDER BY expense_id"
     );
     row = rows;
   } catch (err) {
