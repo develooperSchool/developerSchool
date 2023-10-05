@@ -93,7 +93,7 @@ const getIncomeDetilsById = (req, res) => {
 
 const getAllExpenseDetils = (req, res) => {
   service
-    .getAllExpenseDetils()
+    .getAllExpenseDetils(res)
     .then((resp) => {
       res.status(200).send(resp);
     })

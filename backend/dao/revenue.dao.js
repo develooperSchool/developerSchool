@@ -2,6 +2,7 @@ const db = require("../config/db-config");
 const ExpenseDetailsNotFoundError = require("../errors/ExpenseDetailsNotFoundError");
 const IncomeDetailsNotFoundError = require("../errors/IncomeDetailsNotFoundError");
 const RevenueCatogoryNotFoundError = require("../errors/RevenueCategoryNotFoundError");
+const SqlError = require("../errors/SqlError");
 
 const getAllRevenueCategories = async () => {
   let row = [];
@@ -150,15 +151,15 @@ const getIncomeDetilsById = async (req, res) => {
   return row;
 };
 
-const getAllExpenseDetils = async () => {
+const getAllExpenseDetils = async (res) => {
   let row = [];
   try {
     const [rows, fields] = await db.query(
-      "SELECT * FROM expense ORDER BY expense_id"
+      "SELECT * FROM expense ORDER BY expense_id123"
     );
     row = rows;
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };

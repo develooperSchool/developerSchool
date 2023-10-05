@@ -104,10 +104,10 @@ const getIncomeDetilsById = async (req, res) => {
   return rows;
 };
 
-const getAllExpenseDetils = async () => {
+const getAllExpenseDetils = async (res) => {
   let rows = [];
   await dao
-    .getAllExpenseDetils()
+    .getAllExpenseDetils(res)
     .then((res) => {
       rows = res;
     })
