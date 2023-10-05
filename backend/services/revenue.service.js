@@ -63,16 +63,17 @@ const saveIncomePaymentDetails = async (body) => {
     });
 };
 
-const saveExpensePaymentDetails = async (body) => {
-  // let rows = [];
+const saveExpensePaymentDetails = async (req, res) => {
+  let message = "";
   await dao
-    .saveExpensePaymentDetails(body)
-    .then(() => {
-      // rows = res;
+    .saveExpensePaymentDetails(req, res)
+    .then((msg) => {
+      message = msg;
     })
     .catch((err) => {
       console.log(err);
     });
+  return message;
 };
 
 const getAllIncomeDetils = async () => {

@@ -93,11 +93,11 @@ const saveIncomePaymentDetails = async (body) => {
   return row;
 };
 
-const saveExpensePaymentDetails = async (body) => {
-  const { revenueCategoryId, amount, mentorId, remark } = body;
+const saveExpensePaymentDetails = async (req, res) => {
+  const { revenueCategoryId, amount, mentorId, remark } = req.body;
 
   let query = "";
-  let row = [];
+  let message = "";
   let values = [];
 
   try {
@@ -105,19 +105,16 @@ const saveExpensePaymentDetails = async (body) => {
     query =
       "INSERT INTO expense (revenue_category_id, amount, mentor_id, remark)" +
       "VALUES(?, ?, ?, ?)";
-    const [rows, fields] = await db.query(
-      query,
-      values,
-      function (err, records, fields) {
-        console.log(records);
-        console.log(fields);
-      }
-    );
-    row = rows;
+    const [rows, fields] = await db.query(query, values);
+    if (rows.affectedRows === 0)
+      throw new SaveExpenseErro("COULD NOT SAVE EXPENSE DETIAILS", res);
+    else message = "SUCCESSFULLY SAVED EXPENSE DETAILS";
   } catch (err) {
     console.error(err);
+    message =
+      "ERROR OCCURED WHILE SAVING EXPENSE DETAILS WITH MESSAGE: " + err.message;
   }
-  return row;
+  return message;
 };
 
 const getAllIncomeDetils = async () => {
