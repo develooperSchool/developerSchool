@@ -12,6 +12,12 @@ router.post(
   controller.addRevenueCategory
 );
 
+router.get(
+  "/category/:id",
+  validation.getRevenueCategoryByIdValidation,
+  controller.getRevenueCategoryById
+);
+
 router.delete(
   "/delete/:id",
   validation.deleteRevenueCategoryValidation,

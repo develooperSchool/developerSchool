@@ -12,6 +12,15 @@ const addRevenueCategoryValidation = (req, res, next) => {
     );
 };
 
+const getRevenueCategoryByIdValidation = (req, res, next) => {
+  if (util.isInvalidId(req.params.id))
+    throw new InvalidIdError(
+      "THE ID GIVEN TO FETCH REVENUE CATEGORY IS INVALID",
+      res
+    );
+  else next();
+};
+
 const deleteRevenueCategoryValidation = (req, res, next) => {
   if (util.isInvalidId(req.params.id))
     throw new InvalidIdError(
@@ -98,4 +107,5 @@ module.exports = {
   getIncomeDetilsByIdValidation,
   getExpenseDetilsByIdValidation,
   addRevenueCategoryValidation,
+  getRevenueCategoryByIdValidation,
 };

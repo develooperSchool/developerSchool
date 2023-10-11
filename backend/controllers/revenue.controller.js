@@ -22,6 +22,18 @@ const addRevenueCategory = (req, res) => {
     });
 };
 
+const getRevenueCategoryById = (req, res) => {
+  console.log(req.params.id);
+  service
+    .getRevenueCategoryById(req, res)
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 const deleteRevenueCategory = (req, res) => {
   console.log(req.params.id);
   service
@@ -122,4 +134,5 @@ module.exports = {
   getIncomeDetilsById,
   getAllExpenseDetils,
   getExpenseDetilsById,
+  getRevenueCategoryById,
 };
