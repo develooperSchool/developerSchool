@@ -3,10 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var revenueRouter = require("./routes/revenue.routes");
+var curriculumRouter = require("./routes/curriculumRoutes")
+var courseRouter = require('./routes/courseRoutes');
+
 
 var app = express();
 
@@ -22,7 +24,21 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+
+// curriculum Module
+app.use("/curriculum", curriculumRouter);
+
+
+// Course Module
+app.use("/course", courseRouter);
+
+
+// revenue module
 app.use("/api/v1/revenue", revenueRouter);
+
+
+
+
 
 
 // catch 404 and forward to error handler
