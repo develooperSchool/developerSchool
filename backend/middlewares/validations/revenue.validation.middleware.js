@@ -100,6 +100,14 @@ const getExpenseDetilsByIdValidation = (req, res, next) => {
   else next();
 };
 
+const saveOtherExpenseDetailsValidation = (req, res, next) => {
+  if (util.isInvalidId(req.body.revenueCategoryId))
+    throw new InvalidIdError("THE SELECTED REVENUE CATEGORY IS INVALID", res);
+  if (util.isInvalidAmount(req.body.amount)) {
+    throw new InvalidAmountError("CAN'T MAKE PAYMENT WITH 0 AMOUNT", res);
+  } else next();
+};
+
 module.exports = {
   deleteRevenueCategoryValidation,
   udpateRevenueCategoryByIdValidation,
@@ -108,4 +116,5 @@ module.exports = {
   getExpenseDetilsByIdValidation,
   addRevenueCategoryValidation,
   getRevenueCategoryByIdValidation,
+  saveOtherExpenseDetailsValidation,
 };

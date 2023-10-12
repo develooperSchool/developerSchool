@@ -48,7 +48,11 @@ router.get(
 
 router.get("/expenses", controller.getAllExpenseDetils);
 
-router.post("/expense", controller.saveExpensePaymentDetails);
+router.post(
+  "/expense",
+  validation.saveOtherExpenseDetailsValidation,
+  controller.saveExpensePaymentDetails
+);
 
 router.get(
   "/expense/:id",
