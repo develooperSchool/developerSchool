@@ -48,10 +48,15 @@ const isInvalidGender = (input) => {
   return !/^(Male|Female|Other)$/i.test(input);
 };
 
-const respond = (status, message, res, next) => {
-  if (status !== 0 || message !== "") {
-    res.status(status).send(message);
-  } else next();
+const respond = (message, statusCode, description, timeStamp, res) => {
+  const fieldName = typeof description === "string" ? "description" : "body";
+  const response = {
+    message,
+    statusCode,
+    [fieldName]: description,
+    timeStamp,
+  };
+  res.status(statusCode).send(response);
 };
 
 module.exports = {

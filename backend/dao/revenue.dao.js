@@ -101,7 +101,7 @@ const saveIncomePaymentDetails = async (req, res) => {
       "VALUES(?, ?, ?, ?, ?, ?, ?)";
     const [rows, fields] = await db.query(query, values);
     if (rows.affectedRows === 0)
-      throw new SaveExpenseError("COULD NOT SAVE INCOME DETIAILS", res);
+      throw new SaveIncomeError("COULD NOT SAVE INCOME DETIAILS", res);
     else message = "SUCCESSFULLY SAVED INCOME DETAILS";
   } catch (err) {
     throw new SqlError(String(err.message).toUpperCase(), res);
