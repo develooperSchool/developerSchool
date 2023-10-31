@@ -2,7 +2,9 @@
 
 
 
+import Getallcourse from './Course/pages/Getallcourse';
 import Admindashboard from './Dashborad/Admindashboard';
+import "primeflex/primeflex.css";
 
 
 
@@ -12,8 +14,13 @@ function App() {
     <div className="App">
 
       
+  
+  
+
    <Admindashboard/>
-    
+
+   
+   
 
     
       

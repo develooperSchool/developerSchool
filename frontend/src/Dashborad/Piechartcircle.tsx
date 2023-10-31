@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
+import 'primeicons/primeicons.css';
+        
+
 export default function PiechartCircle() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
