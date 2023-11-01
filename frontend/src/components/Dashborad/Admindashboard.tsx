@@ -22,9 +22,6 @@
 // import Piechart from '../Dashborad/Piechart';
 // import PiechartCircle from './Piechartcircle';
 
-
-        
-
 // const drawerWidth = 240;
 
 // const openedMixin = (theme: Theme): CSSObject => ({
@@ -110,7 +107,7 @@
 
 //   return (
 //     <Box sx={{ display: 'flex' }}>
-      
+
 //       <CssBaseline />
 //       <AppBar position="fixed" open={open}>
 //         <Toolbar>
@@ -143,7 +140,6 @@
 //             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
 //               <ListItemButton
 
-              
 //                 sx={{
 //                   minHeight: 48,
 //                   justifyContent: open ? 'initial' : 'center',
@@ -193,7 +189,7 @@
 //       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
 //         <DrawerHeader />
 //         <Typography paragraph>
-      
+
 //            <div className="container">
 //             <div className="row">
 //               <div className="col-lg-8">
@@ -204,62 +200,63 @@
 //               </div>
 //             </div>
 //            </div>
-  
 
 //         </Typography>
-        
+
 //       </Box>
 //     </Box>
 //   );
 // }
 
-
-import React from 'react'
-import {Routes , Route} from 'react-router-dom'
-import Sidebar from './Sidebar'
-import Topbar from './Topbar'
-import Piechart from "./Piechart"
-import PiechartCircle from './Piechartcircle'
-import Getallcourse from '../Course/pages/Getallcourse'
-import Card from './Card'
-
-
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import Topbar from "./Topbar";
+import Piechart from "./Piechart";
+import PiechartCircle from "./Piechartcircle";
+import Getallcourse from "../Course/pages/Getallcourse";
+import Card from "./Card";
+import Login from "../Login/pages/Login";
 
 const Admindashboard = () => {
   return (
     <div>
-         <div className="container-fluid">
-          <div className="row">
-            <div className="col-lg-2">
-             <Sidebar/>
-            </div>
-            <div className="col-lg-10 one ">
-              <Topbar/>
-              <Routes>
-                <Route path='/' element={<Card/>} ></Route>
-              </Routes>
-              <Routes>
-                <Route path='/course' element={<Getallcourse/>} ></Route>
-              </Routes>
-               <div className="container mx-3 mt-5">
-                <div className="row">
-                  <div className="col-lg-6">
-                  <Routes>
-                    <Route path='/' element=   {<Piechart/>} ></Route>
-                  </Routes>
-                  </div>
-                  <div className="col-lg-6">
-                 <Routes>
-                  <Route path='/' element={ <PiechartCircle/>} ></Route>
-                 </Routes>
-                  </div>
-                </div>
-               </div>
-            </div>
-          </div>  
-         </div>
-    </div>
-  )
-}
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-lg-2">
+            <Sidebar />
+          </div>
+          <div className="col-lg-10 one ">
+            <Topbar />
+            <Routes>
+              <Route path="/" element={<Card />}></Route>
+            </Routes>
+            <Routes>
+              <Route path="/course" element={<Getallcourse />}></Route>
+              <Route path="/login" element={<Login />}></Route>
+            </Routes>
+            {/* <Routes>
+            </Routes> */}
 
-export default Admindashboard
+            <div className="container mx-3 mt-5">
+              <div className="row">
+                <div className="col-lg-6">
+                  <Routes>
+                    <Route path="/" element={<Piechart />}></Route>
+                  </Routes>
+                </div>
+                <div className="col-lg-6">
+                  <Routes>
+                    <Route path="/" element={<PiechartCircle />}></Route>
+                  </Routes>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Admindashboard;

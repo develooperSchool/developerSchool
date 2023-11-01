@@ -1,29 +1,10 @@
-
-
-
-
-import Getallcourse from './Course/pages/Getallcourse';
-import Admindashboard from './Dashborad/Admindashboard';
 import "primeflex/primeflex.css";
-
-
-
+import Admindashboard from "./components/Dashborad/Admindashboard";
 
 function App() {
   return (
     <div className="App">
-
-      
-  
-  
-
-   <Admindashboard/>
-
-   
-   
-
-    
-      
+      <Admindashboard />
     </div>
   );
 }
