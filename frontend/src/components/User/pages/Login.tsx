@@ -33,7 +33,7 @@ const Login: React.FC = () => {
             />
           </div>
           <div className="d-flex justify-content-end">
-            <Link to="" className="nav-link">
+            <Link to={"/forgot-password"} className="nav-link">
               <u>Forgot Password ?</u>
             </Link>
           </div>
@@ -43,7 +43,7 @@ const Login: React.FC = () => {
             </button>
             <div className="form-group mt-3">
               Don't have an account?{" "}
-              <Link to={""} className="text-decoration-none">
+              <Link to={"/register"} className="text-decoration-none">
                 Register here
               </Link>
             </div>

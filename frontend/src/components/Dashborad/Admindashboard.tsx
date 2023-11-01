@@ -216,7 +216,9 @@ import Piechart from "./Piechart";
 import PiechartCircle from "./Piechartcircle";
 import Getallcourse from "../Course/pages/Getallcourse";
 import Card from "./Card";
-import Login from "../Login/pages/Login";
+import Login from "../User/pages/Login";
+import ForgotPassword from "../User/pages/ForgotPassword";
+import Register from "../User/pages/Register";
 
 const Admindashboard = () => {
   return (
@@ -234,6 +236,11 @@ const Admindashboard = () => {
             <Routes>
               <Route path="/course" element={<Getallcourse />}></Route>
               <Route path="/login" element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
+              <Route
+                path="/forgot-password"
+                element={<ForgotPassword />}
+              ></Route>
             </Routes>
             {/* <Routes>
             </Routes> */}
