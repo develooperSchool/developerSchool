@@ -1,4 +1,8 @@
 const db = require("../config/db-config");
+const ExpenseDetailsNotFoundError = require("../errors/ExpenseDetailsNotFoundError");
+const IncomeDetailsNotFoundError = require("../errors/IncomeDetailsNotFoundError");
+const RevenueCatogoryNotFoundError = require("../errors/RevenueCategoryNotFoundError");
+const SqlError = require("../errors/SqlError");
 
 const getAllRevenueCategories = async () => {
   let row = [];
@@ -6,7 +10,7 @@ const getAllRevenueCategories = async () => {
     const [rows] = await db.query("SELECT * FROM revenue_category order by id");
     row = rows;
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
@@ -15,39 +19,43 @@ const addRevenueCategory = async (name) => {
   let row = [name];
   try {
     let query = "INSERT INTO revenue_category (name) VALUES(?)";
-    const [rows] = db.execute(query, row);
+    const [rows, fields] = await db.execute(query, row);
     console.log("result", rows);
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
 
-const deleteRevenueCategory = async (id) => {
-  let row = [id];
+const deleteRevenueCategory = async (req, res) => {
+  let id = req.params.id;
   try {
-    let query = "DELETE FROM  revenue_category WHERE id = ? ";
-    const rows = db.execute(query, row);
-    console.log("result", rows);
+    let query = "DELETE FROM revenue_category WHERE id = ? ";
+    const [result, fields] = await db.query(query, [id]);
+    if (result.affectedRows == 0)
+      throw new RevenueCatogoryNotFoundError(
+        "REVENUE CATEGORY NOT FOUND FOR ID " + id,
+        res
+      );
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
-  return row;
 };
 
 const udpateRevenueCategoryById = async (id, name) => {
   let row = [name, id];
   try {
     let query = "UPDATE revenue_category SET name = ? WHERE id = ?";
-    const rows = db.query(query, row);
+    const [rows, fields] = await db.query(query, row);
     console.log("result", rows);
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
 
-const saveIncomePaymentDetails = async (body) => {
+const saveIncomePaymentDetails = async (req, res) => {
+  let message = "";
   const {
     userId,
     studentId,
@@ -56,13 +64,10 @@ const saveIncomePaymentDetails = async (body) => {
     totalFees,
     paidFees,
     balanceFees,
-  } = body;
+  } = req.body;
 
-  let query = "";
-  let row = [],
-    values = [];
   try {
-    values = [
+    let values = [
       userId,
       studentId,
       revenueCategoryId,
@@ -71,23 +76,24 @@ const saveIncomePaymentDetails = async (body) => {
       paidFees,
       balanceFees,
     ];
-    query =
+    let query =
       "INSERT INTO income (user_id, student_id, revenue_category_id, amount, total_fees, paid_fees, balance_fees) " +
       "VALUES(?, ?, ?, ?, ?, ?, ?)";
-    const rows = db.query(query, values);
-    console.log("result", rows);
-    row = rows;
+    const [rows, fields] = await db.query(query, values);
+    if (rows.affectedRows === 0)
+      throw new SaveIncomeError("COULD NOT SAVE INCOME DETIAILS", res);
+    else message = "SUCCESSFULLY SAVED INCOME DETAILS";
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
-  return row;
+  return message;
 };
 
-const saveExpensePaymentDetails = async (body) => {
-  const { revenueCategoryId, amount, mentorId, remark } = body;
+const saveExpensePaymentDetails = async (req, res) => {
+  const { revenueCategoryId, amount, mentorId, remark } = req.body;
 
   let query = "";
-  let row = [];
+  let message = "";
   let values = [];
 
   try {
@@ -95,18 +101,17 @@ const saveExpensePaymentDetails = async (body) => {
     query =
       "INSERT INTO expense (revenue_category_id, amount, mentor_id, remark)" +
       "VALUES(?, ?, ?, ?)";
-    const rows = db.query(query, values, function (err, records, fields) {
-      console.log(records);
-      console.log(fields);
-    });
-    row = rows;
+    const [rows, fields] = await db.query(query, values);
+    if (rows.affectedRows === 0)
+      throw new SaveExpenseError("COULD NOT SAVE EXPENSE DETIAILS", res);
+    else message = "SUCCESSFULLY SAVED EXPENSE DETAILS";
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
-  return row;
+  return message;
 };
 
-const getAllIncomeDetils = async () => {
+const getAllIncomeDetils = async (res) => {
   let row = [];
   try {
     const [rows, fields] = await db.query(
@@ -114,27 +119,32 @@ const getAllIncomeDetils = async () => {
     );
     row = rows;
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
 
-const getIncomeDetilsById = async (id) => {
+const getIncomeDetilsById = async (req, res) => {
+  let id = req.params.id;
   let row = [];
-  let values = [id];
   try {
     const [rows, fields] = await db.query(
       "SELECT * FROM income WHERE income_id = ?",
-      values
+      [id]
     );
-    row = rows;
+    if (rows.length > 0) row = rows;
+    else
+      throw new IncomeDetailsNotFoundError(
+        "INCOME DETAILS NOT FOUND FOR ID " + id,
+        res
+      );
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
 
-const getAllExpenseDetils = async () => {
+const getAllExpenseDetils = async (res) => {
   let row = [];
   try {
     const [rows, fields] = await db.query(
@@ -142,22 +152,27 @@ const getAllExpenseDetils = async () => {
     );
     row = rows;
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };
 
-const getExpenseDetilsById = async (id) => {
+const getExpenseDetilsById = async (req, res) => {
   let row = [];
-  let values = [id];
+  let id = req.params.id;
   try {
     const [rows, fields] = await db.query(
       "SELECT * FROM expense WHERE expense_id = ?",
-      values
+      [id]
     );
-    row = rows;
+    if (rows.length > 0) row = rows;
+    else
+      throw new ExpenseDetailsNotFoundError(
+        "EXPENSE DETAILS NOT FOUND FOR ID " + id,
+        res
+      );
   } catch (err) {
-    console.error(err);
+    throw new SqlError(String(err.message).toUpperCase(), res);
   }
   return row;
 };

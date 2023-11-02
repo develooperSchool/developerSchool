@@ -1,4 +1,4 @@
-const { INVALID_EMAIL } = require("../utils/revenue.contants");
+const { INVALID_EMAIL } = require("../utils/app.constants");
 const GlobalErrorHandler = require("./GlobalErrorHandler");
 const HttpStatusCode = require("../utils/HttpStatusCode");
 

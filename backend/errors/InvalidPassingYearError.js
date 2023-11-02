@@ -1,4 +1,4 @@
-const { INVALID_PASSING_YEAR } = require("../utils/revenue.contants");
+const { INVALID_PASSING_YEAR } = require("../utils/app.constants");
 const GlobalErrorHandler = require("./GlobalErrorHandler");
 const HttpStatusCode = require("../utils/HttpStatusCode");
 
