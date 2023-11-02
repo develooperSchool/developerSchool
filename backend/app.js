@@ -41,29 +41,15 @@ app.use((req, res, next) => {
 });
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-<<<<<<< HEAD
 app.use("/api/v1/user", usersRouter);
 app.use("/api/v1/revenue", revenueRouter);
-
-=======
 
 // curriculum Module
 app.use("/curriculum", curriculumRouter);
 
-
 // Course Module
 app.use("/course", courseRouter);
 
-
-// revenue module
-app.use("/api/v1/revenue", revenueRouter);
-
-
-
-
-
-
->>>>>>> a2cb831402a1625a776805bd75dd3bed514ba758
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
