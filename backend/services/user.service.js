@@ -1,6 +1,7 @@
 // const { getUserById } = require("../controllers/user.controller");
 const dao = require("../dao/user.dao");
 
+/*GET ALL USERS */
 const getAllUsers = async () => {
   let rows = [];
   await dao
@@ -15,6 +16,35 @@ const getAllUsers = async () => {
   return rows;
 };
 
+/** GET ALL ENROLLMENTS */
+const getAllEnrollments = async () => {
+  let rows = [];
+  await dao
+    .getAllEnrollments()
+    .then((res) => {
+      rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return rows;
+};
+
+/** GET ALL FACUTY ALLOTMENT */
+const getAllAllotments = async () => {
+  let rows = [];
+  await dao
+    .getAllAllotments()
+    .then((res) => {
+      rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return rows;
+};
+
+/*GET ALL ADMINS */
 const getAllAdmins = async () => {
   let row = [];
   await dao
@@ -28,6 +58,7 @@ const getAllAdmins = async () => {
   return row;
 };
 
+/*GET ALL MENTORS */
 const getAllMentors = async () => {
   let row = [];
   await dao
@@ -41,6 +72,7 @@ const getAllMentors = async () => {
   return row;
 };
 
+/*GET ALL GUEST */
 const getAllGuest = async () => {
   let row = [];
   await dao
@@ -54,6 +86,7 @@ const getAllGuest = async () => {
   return row;
 };
 
+/*GET ALL STUDENT */
 const getAllStudent = async () => {
   let row = [];
   await dao
@@ -67,6 +100,7 @@ const getAllStudent = async () => {
   return row;
 };
 
+/* ADD USERS */
 const addUser = async (body) => {
   await dao
     .addUser(body)
@@ -76,6 +110,27 @@ const addUser = async (body) => {
     });
 };
 
+/** ADD ENROLLMENTS */
+const addEnrollments = async (body) => {
+  await dao
+    .addEnrollments(body)
+    .then(() => {})
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+/** ADD FACLUTY ALLOTMENT */
+const addFacultyAllotment = async (body) => {
+  await dao
+    .addFacultyAllotment(body)
+    .then(() => {})
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+/*SIGN IN USERS */
 const signInUser = async (body) => {
   let msg = "";
   await dao
@@ -92,6 +147,7 @@ const signInUser = async (body) => {
   return msg;
 };
 
+/* DELETE USERS */
 const deleteUser = async (user_id) => {
   let msg = "";
   await dao
@@ -107,6 +163,37 @@ const deleteUser = async (user_id) => {
   return msg;
 };
 
+/**DELETE ENROLLMENTS */
+const deleteEnrollment = async (enrollment_id) => {
+  let msg = " ";
+  await dao
+    .deleteEnrollment(enrollment_id)
+    .then((resp) => {
+      if (resp.affectedRows > 0) msg = "ENROLLMENT DELETED";
+      else msg = "NOT EXIST";
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return msg;
+};
+
+/**DELETE FACULTY ALLOTMENT */
+const deleteFacultyAllotment = async (allotment_id) => {
+  let msg = " ";
+  await dao
+    .deleteFacultyAllotment(allotment_id)
+    .then((resp) => {
+      if (resp.affectedRows > 0) msg = "ENROLLMENT DELETED";
+      else msg = "NOT EXIST";
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return msg;
+};
+
+/* UPDATE USERS */
 const updateUser = async (user_id, body) => {
   let msg = "";
   await dao
@@ -133,6 +220,38 @@ const updateUser = async (user_id, body) => {
   return msg;
 };
 
+const updateEnrollment = async (enrollment_id, body) => {
+  let msg = "";
+  await dao
+    .updateEnrollment(enrollment_id, body)
+    .then((resp) => {
+      if (resp.affectedRows > 0) msg = "Updated Successfully";
+      else msg = "Not Exits";
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return msg;
+};
+
+/**UPDATE FACULTY ENROLLMENT */
+const updateFacultyAllotment = async (allotment_id, body) => {
+  let msg = "";
+  await dao
+    .updateFacultyAllotment(allotment_id, body)
+    .then((resp) => {
+      if (resp.affectedRows > 0) msg = "Updated Successfully";
+      else msg = "Not Exits";
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return msg;
+};
+
+/*GET USER BY EMAIL ID */
 const getUserByEmailId = async (email_id) => {
   let result = [];
   await dao
@@ -147,6 +266,7 @@ const getUserByEmailId = async (email_id) => {
   return result;
 };
 
+/*GET USER BY ID */
 const getUserById = async (user_id) => {
   let result = [];
   await dao
@@ -160,6 +280,7 @@ const getUserById = async (user_id) => {
   return result;
 };
 
+/*RESET PASSWORD */
 const resetpassword = async (email_id, password) => {
   let result = "";
   await dao
@@ -205,4 +326,12 @@ module.exports = {
   getAllMentors,
   getAllGuest,
   getAllStudent,
+  getAllEnrollments,
+  addEnrollments,
+  updateEnrollment,
+  deleteEnrollment,
+  getAllAllotments,
+  addFacultyAllotment,
+  updateFacultyAllotment,
+  deleteFacultyAllotment,
 };

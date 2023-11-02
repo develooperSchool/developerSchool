@@ -1,5 +1,6 @@
 const service = require("../services/user.service");
 
+/*GET ALL USERS*/
 const getAllUsers = (req, res) => {
   service
     .getAllUsers()
@@ -11,6 +12,31 @@ const getAllUsers = (req, res) => {
     });
 };
 
+/**GET ALL ENROLLMENTS */
+const getAllEnrollments = (req, res) => {
+  service
+    .getAllEnrollments()
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+/**GET ALL FACULTY ALLOTMENT */
+const getAllAllotments = (req, res) => {
+  service
+    .getAllAllotments()
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+/*GET ALL ADMINS*/
 const getAllAdmins = (req, res) => {
   service
     .getAllAdmins()
@@ -22,6 +48,7 @@ const getAllAdmins = (req, res) => {
     });
 };
 
+/*GET ALL MENTORS*/
 const getAllMentors = (req, res) => {
   service
     .getAllMentors()
@@ -33,6 +60,7 @@ const getAllMentors = (req, res) => {
     });
 };
 
+/*GET ALL GUEST*/
 const getAllGuest = (req, res) => {
   service
     .getAllGuest()
@@ -44,6 +72,7 @@ const getAllGuest = (req, res) => {
     });
 };
 
+/*GET ALL STUDENTS*/
 const getAllStudent = (req, res) => {
   service
     .getAllStudent()
@@ -55,6 +84,7 @@ const getAllStudent = (req, res) => {
     });
 };
 
+/*ADD USERS*/
 const addUser = (req, res) => {
   service
     .addUser(req.body)
@@ -66,6 +96,31 @@ const addUser = (req, res) => {
     });
 };
 
+/** ADD ENROLLMENTS */
+const addEnrollments = (req, res) => {
+  service
+    .addEnrollments(req.body)
+    .then(() => {
+      res.status(200).send("ENTROLL SUCCESSFULLY");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+/** ADD FACULTY ALLOTMENT */
+const addFacultyAllotment = (req, res) => {
+  service
+    .addFacultyAllotment(req.body)
+    .then(() => {
+      res.status(200).send(" FACULTY ALLOTED SUCCESSFULLY");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+/*DELETE USERS*/
 const deleteUser = (req, res) => {
   console.log(req.params.id);
   service
@@ -78,6 +133,33 @@ const deleteUser = (req, res) => {
     });
 };
 
+/**DELETE ENROLLMENT */
+const deleteEnrollment = (req, res) => {
+  console.log(req.params.id);
+  service
+    .deleteEnrollment(req.params.id)
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+/**DELETE FACULTY ENROLLMENT */
+const deleteFacultyAllotment = (req, res) => {
+  console.log(req.params.id);
+  service
+    .deleteFacultyAllotment(req.params.id)
+    .then((resp) => {
+      res.status(200).send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+/*UPDATE USERS*/
 const updateUser = (req, res) => {
   console.log(req.params.id, req.body);
   service
@@ -90,6 +172,33 @@ const updateUser = (req, res) => {
     });
 };
 
+/**UPADTE ENROLLMENTS */
+const updateEnrollment = (req, res) => {
+  console.log(req.params.id, req.body);
+  service
+    .updateEnrollment(req.params.id, req.body)
+    .then((msg) => {
+      res.status(200).send(msg);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+/**UPADTE FACULTY ENROLLMENT */
+const updateFacultyAllotment = (req, res) => {
+  console.log(req.params.id, req.body);
+  service
+    .updateFacultyAllotment(req.params.id, req.body)
+    .then((msg) => {
+      res.status(200).send(msg);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+/*GET USER BY EMAIL ID*/
 const getUserByEmailId = (req, res) => {
   console.log(req.query.email);
   service
@@ -102,6 +211,7 @@ const getUserByEmailId = (req, res) => {
     });
 };
 
+/*GET USER BY ID*/
 const getUserById = (req, res) => {
   console.log(req.params.id);
   service
@@ -114,6 +224,7 @@ const getUserById = (req, res) => {
     });
 };
 
+/*SIGN IN USER*/
 const signInUser = (req, res) => {
   service
     .signInUser(req.body)
@@ -125,6 +236,7 @@ const signInUser = (req, res) => {
     });
 };
 
+/*RESET PASSWORD*/
 const resetpassword = (req, res) => {
   const { email_id, password } = req.body;
   service
@@ -137,6 +249,7 @@ const resetpassword = (req, res) => {
     });
 };
 
+/*CHECK EMAIL*/
 const checkEmail = (req, res) => {
   service
     .checkEmail(req.body)
@@ -162,4 +275,12 @@ module.exports = {
   getAllMentors,
   getAllGuest,
   getAllStudent,
+  getAllEnrollments,
+  addEnrollments,
+  updateEnrollment,
+  deleteEnrollment,
+  getAllAllotments,
+  addFacultyAllotment,
+  updateFacultyAllotment,
+  deleteFacultyAllotment,
 };

@@ -28,13 +28,6 @@ const getUserByEmailValidation = (req, res, next) => {
   else next();
 };
 
-/* CHECK MAIL ID VALIDATION */
-const checkEmailValidation = (req, res, next) => {
-  if (userUtil.isInvalidEmailId(req.body.email))
-    throw new InvalidEmailError("Given email is not valid", res);
-  else next();
-};
-
 /* DELETE USER BY ID VALIDATION */
 const deleteUserByIdValidation = (req, res, next) => {
   if (userUtil.isInvalidId(req.params.id))
@@ -49,15 +42,7 @@ const updateUserByIdValidation = (req, res, next) => {
   else next();
 };
 
-/* SIGN IN USER VALIDATION */
-const signInValidation = (req, res, next) => {
-  if (userUtil.isInvalidEmailId(req.body.email))
-    throw new InvalidEmailError("USER NAME INVALID", res);
-  if (userUtil.isInvalidPassword(req.body.password))
-    throw new InvalidPasswordError("PASSWORD MUST HAVE 8 CHARACTERS", res);
-  else next();
-};
-
+/**ADD USER VALIDATION */
 const addUserValidation = (req, res, next) => {
   if (userUtil.isInvalidName(req.body.firstName))
     throw new InvalidNameError("FIRST NAME INVALID", res);
@@ -94,6 +79,68 @@ const addUserValidation = (req, res, next) => {
   else next();
 };
 
+/**ADD ENROLLMENT VALIDATION */
+const addEnrollmentValidation = (req, res, next) => {
+  if (userUtil.isInvalidId(req.body.userId))
+    throw new InvalidIdError("INVALID USER ID", res);
+  if (userUtil.isInvalidId(req.body.courseId))
+    throw new InvalidIdError("INVALID COURSE ID", res);
+  else next();
+};
+
+/**ADD FACULTY ENROLLMENT VALIDATION */
+const addFacultyAllotmentValidation = (req, res, next) => {
+  if (userUtil.isInvalidId(req.body.userId))
+    throw new InvalidIdError("INVALID USER ID", res);
+  if (userUtil.isInvalidId(req.body.subjectId))
+    throw new InvalidIdError("INVALID SUBJECT ID", res);
+  else next();
+};
+
+/**UPDATE ENROLLMENT VALIDATION */
+const updateEnrollmentValidation = (req, res, next) => {
+  if (userUtil.isInvalidId(req.params.id))
+    throw new InvalidIdError("INVALID ID", res);
+  else next();
+};
+
+/**UPDATE FACULTY ALLOTMENT VALIDATION */
+const updateFacultyAllotmentValidation = (req, res, next) => {
+  if (userUtil.isInvalidId(req.params.id))
+    throw new InvalidIdError("INVALID ID", res);
+  else next();
+};
+
+/**DELETE ENROLLMENT VALIDATION */
+const deleteEnrollmentValidation = (req, res, next) => {
+  if (userUtil.isInvalidId(req.params.id))
+    throw new InvalidIdError("INVALID ID", res);
+  else next();
+};
+
+/**DELETE FACULTY ALLOTMENT VALIDATION */
+const deleteFacultyAllotmentValidation = (req, res, next) => {
+  if (userUtil.isInvalidId(req.params.id))
+    throw new InvalidIdError("INVALID ID", res);
+  else next();
+};
+
+/* SIGN IN USER VALIDATION */
+const signInValidation = (req, res, next) => {
+  if (userUtil.isInvalidEmailId(req.body.email))
+    throw new InvalidEmailError("USER NAME INVALID", res);
+  if (userUtil.isInvalidPassword(req.body.password))
+    throw new InvalidPasswordError("PASSWORD MUST HAVE 8 CHARACTERS", res);
+  else next();
+};
+
+/* CHECK MAIL ID VALIDATION */
+const checkEmailValidation = (req, res, next) => {
+  if (userUtil.isInvalidEmailId(req.body.email))
+    throw new InvalidEmailError("Given email is not valid", res);
+  else next();
+};
+
 module.exports = {
   getUserByEmailValidation,
   getUserByIdValidation,
@@ -102,4 +149,10 @@ module.exports = {
   updateUserByIdValidation,
   signInValidation,
   addUserValidation,
+  updateEnrollmentValidation,
+  deleteEnrollmentValidation,
+  addEnrollmentValidation,
+  addFacultyAllotmentValidation,
+  updateFacultyAllotmentValidation,
+  deleteFacultyAllotmentValidation,
 };

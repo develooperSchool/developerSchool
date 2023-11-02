@@ -9,6 +9,16 @@ router.get("/", function (req, res) {
   controller.getAllUsers(req, res);
 });
 
+/* GET ALL ENROLLMENT */
+router.get("/allEnrollment", (req, res) => {
+  controller.getAllEnrollments(req, res);
+});
+
+/** GET ALL FACULTY ALLOTMENTS */
+router.get("/allAllotments", (req, res) => {
+  controller.getAllAllotments(req, res);
+});
+
 /*GET ALL ADMINS */
 router.get("/allAdmins", (req, res) => {
   controller.getAllAdmins(req, res);
@@ -28,6 +38,57 @@ router.get("/allGuest", (req, res) => {
 router.get("/allStudent", (req, res) => {
   controller.getAllStudent(req, res);
 });
+
+/** ADD ENROLLMENT */
+router.post(
+  "/addEnrollment",
+  validation.addEnrollmentValidation,
+  controller.addEnrollments
+);
+
+/** ADD FACULTY ALLOTMENT */
+router.post(
+  "/addAllotment",
+  validation.addFacultyAllotmentValidation,
+  controller.addFacultyAllotment
+);
+
+/**UPDATE ENROLLMENT */
+router.put(
+  "/updateEnrollment/:id",
+  validation.updateEnrollmentValidation,
+  controller.updateEnrollment
+);
+
+/** UPDATE FACULTY ALLOTMENT */
+router.put(
+  "/updateAllotment/:id",
+  validation.updateFacultyAllotmentValidation,
+  controller.updateFacultyAllotment
+);
+
+/**DELETE ENTROLLMENT */
+router.delete(
+  "/deleteEnrollment/:id",
+  validation.deleteEnrollmentValidation,
+  controller.deleteEnrollment
+);
+
+/**DELETE FACULTY ALLOTMENT */
+router.delete(
+  "/deleteAllotment/:id",
+  validation.deleteFacultyAllotmentValidation,
+  controller.deleteFacultyAllotment
+);
+
+/* SIGNIN USERS -- WITH VALIDATION--- */
+router.post("/signin", validation.signInValidation, controller.signInUser);
+
+/* CHECK MAIL ---- WITH VALIDATION---- */
+router.post("/email", validation.checkEmailValidation, controller.checkEmail);
+
+/* GET USER BY ID ---WITH VALIDATION ---- */
+router.get("/:id", validation.getUserByIdValidation, controller.getUserById);
 
 /* GET USER BY EMAIL ID ---- WITH VALIDATION ---- */
 router.get(
@@ -52,14 +113,5 @@ router.put(
   validation.updateUserByIdValidation,
   controller.updateUser
 );
-
-/* SIGNIN USERS -- WITH VALIDATION--- */
-router.post("/signin", validation.signInValidation, controller.signInUser);
-
-/* CHECK MAIL ---- WITH VALIDATION---- */
-router.post("/email", validation.checkEmailValidation, controller.checkEmail);
-
-/* GET USER BY ID ---WITH VALIDATION ---- */
-router.get("/:id", validation.getUserByIdValidation, controller.getUserById);
 
 module.exports = router;

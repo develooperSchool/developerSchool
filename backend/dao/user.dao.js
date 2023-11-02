@@ -12,6 +12,31 @@ const getAllUsers = async () => {
   }
   return row;
 };
+const getAllEnrollments = async () => {
+  let row = [];
+  try {
+    const [rows] = await db.query(
+      "select * from enrollment order by enrollment_id"
+    );
+    row = rows;
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
+};
+
+const getAllAllotments = async () => {
+  let row = [];
+  try {
+    const [rows] = await db.query(
+      "select * from faculty_allotment order by allotment_id"
+    );
+    row = rows;
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
+};
 
 const getAllAdmins = async () => {
   let row = [];
@@ -66,6 +91,32 @@ const add = async (body) => {
     const query =
       "INSERT INTO user_profile (first_name,last_name) values (?,?) ";
 
+    const rows = await db.execute(query, values);
+    console.log(rows);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const addEnrollments = async (body) => {
+  try {
+    const { userId, courseId } = body;
+    const values = [userId, courseId];
+    const query = "insert into enrollment (user_id, course_id) values (? ,?)";
+    const rows = await db.execute(query, values);
+    console.log(rows);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+/** ADD FACULTY ALLOTMENT */
+const addFacultyAllotment = async (body) => {
+  try {
+    const { userId, subjectId } = body;
+    const values = [userId, subjectId];
+    const query =
+      "insert into faculty_allotment (user_id, subject_id) values (? ,?)";
     const rows = await db.execute(query, values);
     console.log(rows);
   } catch (err) {
@@ -143,6 +194,33 @@ const deleteUser = async (user_id) => {
   return row;
 };
 
+/** DELETE ENROLLMENTS */
+const deleteEnrollment = async (enrollment_id) => {
+  let row = [enrollment_id];
+  try {
+    const query = "delete from enrollment where enrollment_id =?";
+    const [rows, fields] = await db.execute(query, row);
+    row = rows;
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
+};
+
+/** DELETE FACULTY ALLOTMENT */
+const deleteFacultyAllotment = async (allotment_id) => {
+  let row = [allotment_id];
+  try {
+    const query = "delete from faculty_allotment where allotment_id =?";
+    const [rows, fields] = await db.execute(query, row);
+    row = rows;
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
+};
+
+/** UPDATE USERS */
 const updateUser = async (user_id, body) => {
   let row = [user_id, body];
   try {
@@ -178,6 +256,38 @@ const updateUser = async (user_id, body) => {
     ];
     const [rows, fields] = await db.query(query, values);
     // console.log("result", rows);
+    row = rows;
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
+};
+
+/** UPDATE ENROLLMENTS */
+const updateEnrollment = async (enrollment_id, body) => {
+  let row = [enrollment_id, body];
+  try {
+    const query =
+      "update enrollment set user_id = ?, course_id =? where enrollment_id =?";
+    const { userId, courseId } = body;
+    const values = [userId, courseId, enrollment_id];
+    const [rows, fields] = await db.query(query, values);
+    row = rows;
+  } catch (err) {
+    console.log(err);
+  }
+  return row;
+};
+
+/** UPDATE FACULTY ALLOTMENT */
+const updateFacultyAllotment = async (allotment_id, body) => {
+  let row = [allotment_id, body];
+  try {
+    const query =
+      "update faculty_allotment set user_id = ?, subject_id =? where allotment_id =?";
+    const { userId, subjectId } = body;
+    const values = [userId, subjectId, allotment_id];
+    const [rows, fields] = await db.query(query, values);
     row = rows;
   } catch (err) {
     console.log(err);
@@ -264,4 +374,12 @@ module.exports = {
   getAllMentors,
   getAllGuest,
   getAllStudent,
+  getAllEnrollments,
+  addEnrollments,
+  updateEnrollment,
+  deleteEnrollment,
+  getAllAllotments,
+  addFacultyAllotment,
+  updateFacultyAllotment,
+  deleteFacultyAllotment,
 };
