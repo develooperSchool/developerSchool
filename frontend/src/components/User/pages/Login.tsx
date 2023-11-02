@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import loginService from "../service/loginService";
+import ILogin from "../model/ILogin";
 
 const Login: React.FC = () => {
-  const [username, setUsername] = useState<string>("");
+  const [email, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(username, password);
+    console.log(email, password);
+    let data: ILogin = { email, password };
+    loginService
+      .login(data)
+      .then((response) => console.log(response))
+      .catch((error) => alert(error.response.data.message));
   };
   return (
     <div className="d-flex justify-content-center">
@@ -18,7 +25,7 @@ const Login: React.FC = () => {
             <label htmlFor="username">Username</label>
             <input
               type="email"
-              value={username}
+              value={email}
               className="form-control"
               onChange={(e) => setUsername(e.target.value)}
             />
