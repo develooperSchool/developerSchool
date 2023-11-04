@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../../../Style/form.css";
 
 const ForgotPassword = () => {
   const [username, setUsername] = useState<string>("");
@@ -9,9 +10,10 @@ const ForgotPassword = () => {
   };
   return (
     <div className="d-flex justify-content-center">
-      <div className="mt-5 card col-lg-5">
-        <h3 className="card-header">Forgot Password</h3>
-        <form onSubmit={(e) => submitHandler(e)} className=" p-3 card-body">
+      <div className="mt-5 form-border col-lg-5">
+        <h3 className="">Forgot Password</h3>
+        <hr />
+        <form onSubmit={(e) => submitHandler(e)} className="p-3">
           <div className="form-group mt-3 ">
             <label htmlFor="username">Enter registered Email Address</label>
             <input
@@ -21,7 +23,7 @@ const ForgotPassword = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <div className="mt-5 card-footer">
+          <div className="mt-5">
             <button type="submit" className="btn btn-success">
               Submit
             </button>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import loginService from "../service/loginService";
 import ILogin from "../model/ILogin";
+import "../../../Style/form.css";
 
 const Login: React.FC = () => {
   const [email, setUsername] = useState<string>("");
@@ -14,13 +15,14 @@ const Login: React.FC = () => {
     loginService
       .login(data)
       .then((response) => console.log(response))
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) => console.log(error));
   };
   return (
     <div className="d-flex justify-content-center">
-      <div className="mt-5 card col-lg-5">
-        <h3 className="card-header">Login</h3>
-        <form onSubmit={(e) => loginHandler(e)} className=" p-3 card-body">
+      <div className="mt-5 form-border col-lg-5">
+        <h3 className="">Login</h3>
+        <hr />
+        <form onSubmit={(e) => loginHandler(e)} className="p-3">
           <div className="form-group mt-3 ">
             <label htmlFor="username">Username</label>
             <input
@@ -44,7 +46,7 @@ const Login: React.FC = () => {
               <u>Forgot Password ?</u>
             </Link>
           </div>
-          <div className="mt-3 card-footer">
+          <div className="mt-3">
             <button type="submit" className="btn btn-success">
               Login
             </button>

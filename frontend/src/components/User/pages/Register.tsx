@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../../../Style/form.css";
 
 const Register = () => {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [contact, setContact] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [qualification, setQualification] = useState<string>("");
+  const [passingYear, setPassingYear] = useState<string>("");
+  const [dob, setDob] = useState<string>("");
   const [gender, setGender] = useState<string>("");
   const [caste, setCaste] = useState<string>("");
   const [subCaste, setSubCaste] = useState<string>("");
@@ -24,12 +29,10 @@ const Register = () => {
   };
   return (
     <div className="d-flex justify-content-center">
-      <div className="mt-5 card col-lg-5">
-        <h3 className="card-header">Registration</h3>
-        <form
-          onSubmit={(e) => registerationHandler(e)}
-          className=" p-3 card-body"
-        >
+      <div className="mt-5 form-border col-lg-5">
+        <h3 className="">Registration</h3>
+        <hr />
+        <form onSubmit={(e) => registerationHandler(e)} className="p-3">
           <div className="form-group mt-3">
             <label htmlFor="firstName">First Name</label>
             <input
@@ -71,6 +74,46 @@ const Register = () => {
             />
           </div>
           <div className="form-group mt-3">
+            <label htmlFor="address">Address</label>
+            <input
+              id="address"
+              type="text"
+              className="form-control"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label htmlFor="qualification">Qualification</label>
+            <input
+              id="qualification"
+              type="text"
+              className="form-control"
+              value={qualification}
+              onChange={(e) => setQualification(e.target.value)}
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label htmlFor="passingYear">Passing Year</label>
+            <input
+              id="passingYear"
+              type="number"
+              className="form-control"
+              value={passingYear}
+              onChange={(e) => setPassingYear(e.target.value)}
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label htmlFor="dob">Date of Birth</label>
+            <input
+              id="dob"
+              type="date"
+              className="form-control"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+            />
+          </div>
+          <div className="form-group mt-3">
             <label htmlFor="email">Gender</label>
             <select
               name="gender"
@@ -105,7 +148,7 @@ const Register = () => {
               onChange={(e) => setSubCaste(e.target.value)}
             />
           </div>
-          <div className="mt-3 card-footer">
+          <div className="mt-3">
             <button type="submit" className="btn btn-success">
               Register
             </button>
