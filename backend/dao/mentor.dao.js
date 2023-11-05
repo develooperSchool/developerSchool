@@ -52,5 +52,4 @@ const deleteMentorById = async (id) => {
     return message;
 }
 
-
 module.exports = { getAllMentors, addMentor, updateMentor, deleteMentorById };
