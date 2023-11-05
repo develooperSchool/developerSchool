@@ -1,47 +1,121 @@
+
+
+
+
 var express = require("express");
 var router = express.Router();
 const controller = require("../controllers/user.controller");
 const validation = require("../middlewares/users.validation.middleware");
+const { updateUser } = require("../dao/user.dao");
 
-/* GET users listing. */
+/* GET ALL USERS  */
 router.get("/", function (req, res) {
   controller.getAllUsers(req, res);
 });
 
-router.use("/", (req, res, next) => {
-  validation.getUserByEmailIdValidation(req, res, next);
+/* GET ALL ENROLLMENT */
+router.get("/allEnrollment", (req, res) => {
+  controller.getAllEnrollments(req, res);
 });
 
-router.get("/email", function (req, res) {
-  controller.getUserByEmailId(req, res);
+/** GET ALL FACULTY ALLOTMENTS */
+router.get("/allAllotments", (req, res) => {
+  controller.getAllAllotments(req, res);
 });
 
-router.use("/:id", (req, res, next) => {
-  validation.getUserByIdValidation(req, res, next);
+/*GET ALL ADMINS */
+router.get("/allAdmins", (req, res) => {
+  controller.getAllAdmins(req, res);
 });
 
-router.get("/:id", function (req, res) {
-  controller.getUserById(req, res);
+/*GET ALL MENTORS */
+router.get("/allMentors", (req, res) => {
+  controller.getAllMentors(req, res);
 });
 
-router.post("/add", function (req, res) {
-  controller.addUser(req, res);
+/*GET ALL GUEST */
+router.get("/allGuest", (req, res) => {
+  controller.getAllGuest(req, res);
 });
 
-router.delete("/delete/:id", function (req, res) {
-  controller.deleteUser(req, res);
+/*GET ALL STUDENT */
+router.get("/allStudent", (req, res) => {
+  controller.getAllStudent(req, res);
 });
 
-router.put("/update/:id", function (req, res) {
-  controller.updateUser(req, res);
-});
+/** ADD ENROLLMENT */
+router.post(
+  "/addEnrollment",
+  validation.addEnrollmentValidation,
+  controller.addEnrollments
+);
 
-router.post("/signin", function (req, res) {
-  controller.signInUser(req, res);
-});
+/** ADD FACULTY ALLOTMENT */
+router.post(
+  "/addAllotment",
+  validation.addFacultyAllotmentValidation,
+  controller.addFacultyAllotment
+);
 
-router.post("/checkEmail", function (req, res) {
-  controller.checkEmail(req, res);
-});
+/**UPDATE ENROLLMENT */
+router.put(
+  "/updateEnrollment/:id",
+  validation.updateEnrollmentValidation,
+  controller.updateEnrollment
+);
+
+/** UPDATE FACULTY ALLOTMENT */
+router.put(
+  "/updateAllotment/:id",
+  validation.updateFacultyAllotmentValidation,
+  controller.updateFacultyAllotment
+);
+
+/**DELETE ENTROLLMENT */
+router.delete(
+  "/deleteEnrollment/:id",
+  validation.deleteEnrollmentValidation,
+  controller.deleteEnrollment
+);
+
+/**DELETE FACULTY ALLOTMENT */
+router.delete(
+  "/deleteAllotment/:id",
+  validation.deleteFacultyAllotmentValidation,
+  controller.deleteFacultyAllotment
+);
+
+/* SIGNIN USERS -- WITH VALIDATION--- */
+router.post("/signin", validation.signInValidation, controller.signInUser);
+
+/* CHECK MAIL ---- WITH VALIDATION---- */
+router.post("/email", validation.checkEmailValidation, controller.checkEmail);
+
+/* GET USER BY ID ---WITH VALIDATION ---- */
+router.get("/:id", validation.getUserByIdValidation, controller.getUserById);
+
+/* GET USER BY EMAIL ID ---- WITH VALIDATION ---- */
+router.get(
+  "/email",
+  validation.getUserByEmailValidation,
+  controller.getUserByEmailId
+);
+
+/* ADD USERS --- WITH VALIDATIONS---- */
+router.post("/add", validation.addUserValidation, controller.addUser);
+
+/* DELETE USERS  ---- WITH VALIDATIONS------ */
+router.delete(
+  "/delete/:id",
+  validation.deleteUserByIdValidation,
+  controller.deleteUser
+);
+
+/* UPDATE USERS  ----- WITH VALIDATION----- */
+router.put(
+  "/update/:id",
+  validation.updateUserByIdValidation,
+  controller.updateUser
+);
 
 module.exports = router;

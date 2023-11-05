@@ -1,4 +1,7 @@
 const service = require("../services/revenue.service");
+const HttpStatusCode = require("../utils/HttpStatusCode");
+const { respond } = require("../utils/app.utils");
+const { SUCCESS } = require("../utils/app.constants");
 
 const getAllRevenueCategories = (req, res) => {
   service
@@ -46,11 +49,10 @@ const udpateRevenueCategoryById = (req, res) => {
     });
 };
 const saveIncomePaymentDetails = (req, res) => {
-  console.log(req.body);
   service
-    .saveIncomePaymentDetails(req.body)
-    .then(() => {
-      res.status(200).send("INCOME PAYMENT SUCCESSFUL");
+    .saveIncomePaymentDetails(req, res)
+    .then((message) => {
+      respond(SUCCESS, HttpStatusCode.OK, message, new Date(Date.now()), res);
     })
     .catch((err) => {
       console.log(err);
@@ -58,9 +60,8 @@ const saveIncomePaymentDetails = (req, res) => {
 };
 
 const saveExpensePaymentDetails = (req, res) => {
-  console.log(req.body);
   service
-    .saveExpensePaymentDetails(req.body)
+    .saveExpensePaymentDetails(req, res)
     .then(() => {
       res.status(200).send("EXPENSE PAYMENT SUCCESSFUL");
     })
@@ -71,9 +72,9 @@ const saveExpensePaymentDetails = (req, res) => {
 
 const getAllIncomeDetils = (req, res) => {
   service
-    .getAllIncomeDetils()
-    .then((resp) => {
-      res.status(200).send(resp);
+    .getAllIncomeDetils(res)
+    .then((response) => {
+      respond(SUCCESS, HttpStatusCode.OK, response, new Date(Date.now()), res);
     })
     .catch((err) => {
       console.log(err);
@@ -93,7 +94,7 @@ const getIncomeDetilsById = (req, res) => {
 
 const getAllExpenseDetils = (req, res) => {
   service
-    .getAllExpenseDetils()
+    .getAllExpenseDetils(res)
     .then((resp) => {
       res.status(200).send(resp);
     })
