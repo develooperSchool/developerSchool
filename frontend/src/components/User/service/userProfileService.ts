@@ -1,9 +1,10 @@
 import axios from "axios";
+import { IUser } from "../model/IUser";
 
-class UserProfileService {
+class UserService {
   private static baseUrl: string = `http://localhost:8080/api/v1/user`;
 
-  public static getUserById = async (id: string): Promise<any> => {
+  public static getUserById = async (id: string): Promise<IUser | any> => {
     console.log(this.baseUrl);
     const result = await axios.get(`${this.baseUrl}/${id}`);
     console.log("result", result);
@@ -11,4 +12,5 @@ class UserProfileService {
   };
 }
 
-export default UserProfileService;
+export default UserService;
+
