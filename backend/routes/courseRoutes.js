@@ -14,9 +14,9 @@ courseRouter.get(
   courseValidation.getCourseByIdValidation,
   courseController.getCourseById
 );
-
+       
 courseRouter.post("/add", (req, res) => {
-  courseController.getCreatecourse(req, res);
+  courseController.getCreatecourse(req, res); 
 });
 
 courseRouter.put("/update/:id", (req, res) => {
