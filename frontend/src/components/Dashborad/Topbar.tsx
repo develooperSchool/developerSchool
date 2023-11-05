@@ -28,11 +28,13 @@ const Topbar = () => {
                 </a>
               </li>
               <li className="nav-item active">
-                {/* <a className="nav-link" href="/login">
-                  Login
-                </a> */}
                 <Link to="/login" className="nav-link">
                   Login
+                </Link>
+              </li>
+              <li className="nav-item active">
+                <Link to="/user-profile/44" className="nav-link">
+                  Profile
                 </Link>
               </li>
             </ul>

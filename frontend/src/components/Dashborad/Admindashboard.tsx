@@ -219,6 +219,7 @@ import Card from "./Card";
 import Login from "../User/pages/Login";
 import ForgotPassword from "../User/pages/ForgotPassword";
 import Register from "../User/pages/Register";
+import UserProfile from "../User/pages/UserProfile";
 
 const Admindashboard = () => {
   return (
@@ -241,6 +242,7 @@ const Admindashboard = () => {
                 path="/forgot-password"
                 element={<ForgotPassword />}
               ></Route>
+              <Route path="/user-profile/:id" element={<UserProfile />}></Route>
             </Routes>
             {/* <Routes>
             </Routes> */}
