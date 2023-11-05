@@ -6,11 +6,8 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@hapi/joi": "^17.1.1",
-=======
     "body-parser": "^1.20.2",
->>>>>>> a2cb831402a1625a776805bd75dd3bed514ba758
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",

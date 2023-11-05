@@ -12,6 +12,12 @@ router.post(
   controller.addRevenueCategory
 );
 
+router.get(
+  "/category/:id",
+  validation.getRevenueCategoryByIdValidation,
+  controller.getRevenueCategoryById
+);
+
 router.delete(
   "/delete/:id",
   validation.deleteRevenueCategoryValidation,
@@ -42,7 +48,11 @@ router.get(
 
 router.get("/expenses", controller.getAllExpenseDetils);
 
-router.post("/expense", controller.saveExpensePaymentDetails);
+router.post(
+  "/expense",
+  validation.saveOtherExpenseDetailsValidation,
+  controller.saveExpensePaymentDetails
+);
 
 router.get(
   "/expense/:id",

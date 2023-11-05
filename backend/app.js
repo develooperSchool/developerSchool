@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -7,15 +6,6 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users.routes.js");
-=======
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
->>>>>>> a2cb831402a1625a776805bd75dd3bed514ba758
 var revenueRouter = require("./routes/revenue.routes");
 var curriculumRouter = require("./routes/curriculumRoutes")
 var courseRouter = require('./routes/courseRoutes');
@@ -33,31 +23,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-<<<<<<< HEAD
 app.use("/api/v1/user", usersRouter);
 app.use("/api/v1/revenue", revenueRouter);
-
-=======
 
 // curriculum Module
 app.use("/curriculum", curriculumRouter);
 
-
 // Course Module
 app.use("/course", courseRouter);
 
-
-// revenue module
-app.use("/api/v1/revenue", revenueRouter);
-
-
-
-
-
-
->>>>>>> a2cb831402a1625a776805bd75dd3bed514ba758
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

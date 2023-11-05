@@ -27,6 +27,26 @@ const addRevenueCategory = async (name) => {
   return row;
 };
 
+const getRevenueCategoryById = async (req, res) => {
+  let row = [];
+  let id = req.params.id;
+  try {
+    const [rows, fields] = await db.query(
+      "SELECT * FROM revenue_category WHERE id = ?",
+      [id]
+    );
+    if (rows.length > 0) row = rows[0];
+    else
+      throw new RevenueCatogoryNotFoundError(
+        "REVENUE CATEGORY NOT FOUND FOR GIVEN ID",
+        res
+      );
+  } catch (err) {
+    console.error(err);
+  }
+  return row;
+};
+
 const deleteRevenueCategory = async (req, res) => {
   let id = req.params.id;
   try {
@@ -188,4 +208,5 @@ module.exports = {
   getAllExpenseDetils,
   getIncomeDetilsById,
   getExpenseDetilsById,
+  getRevenueCategoryById,
 };

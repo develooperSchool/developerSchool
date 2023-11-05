@@ -14,6 +14,20 @@ const getAllRevenueCategories = async () => {
   return rows;
 };
 
+const getRevenueCategoryById = async (req, res) => {
+  let rows = [];
+  await dao
+    .getRevenueCategoryById(req, res)
+    .then((res) => {
+      rows = res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return rows;
+};
+
 const addRevenueCategory = async (name) => {
   // let rows = [];
   await dao
@@ -144,4 +158,5 @@ module.exports = {
   getIncomeDetilsById,
   getAllExpenseDetils,
   getExpenseDetilsById,
+  getRevenueCategoryById,
 };
