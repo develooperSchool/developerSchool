@@ -1,4 +1,7 @@
 const service = require("../services/user.service");
+const HttpStatusCode = require("../utils/HttpStatusCode");
+const { SUCCESS, FAILURE } = require("../utils/app.constants");
+const { respond } = require("../utils/app.utils");
 
 /*GET ALL USERS*/
 const getAllUsers = (req, res) => {
@@ -229,10 +232,18 @@ const signInUser = (req, res) => {
   service
     .signInUser(req.body)
     .then((resp) => {
-      res.status(200).send(resp);
+      respond(SUCCESS, HttpStatusCode.OK, resp, new Date(Date.now()), res);
+      // res.status(200).send(resp);
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
+      respond(
+        FAILURE,
+        HttpStatusCode.INTERNAL_SERVER_ERROR,
+        err,
+        new Date(Date.now()),
+        res
+      );
     });
 };
 
