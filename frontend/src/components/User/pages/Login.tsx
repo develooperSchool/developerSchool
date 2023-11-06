@@ -27,8 +27,8 @@ const Login: React.FC = () => {
     let data: ILogin = { email, password };
     dispatch(UserAction.login(data))
       .then((response: any) => {
-        if (response && !response.error && response.payload) {
-          const { user_id } = response.payload.data[0];
+        if (response && !response.error && response.payload.data) {
+          const { user_id } = response.payload.data.body[0];
           navigate(`/user-profile/${user_id}`);
         }
       })

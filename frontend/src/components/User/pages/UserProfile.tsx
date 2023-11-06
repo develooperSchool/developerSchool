@@ -22,19 +22,6 @@ const UserProfile = () => {
     }
   );
   useEffect(() => {
-    // console.log(userId);
-    // if (userId !== undefined)
-    //   userProfileService
-    //     .getUserById(userId)
-    //     .then((response) => {
-    //       const { first_name, email_id, contact, gender } = response.data[0];
-    //       setName(first_name);
-    //       setEmail(email_id);
-    //       setContact(contact);
-    //       setGender(gender);
-    //     })
-    //     .catch((error) => console.log(error));
-
     getUserById(userId);
   }, []);
 
@@ -62,6 +49,7 @@ const UserProfile = () => {
         paddingTop: "2rem",
       }}
     >
+      {/* width: "90%"{" "} */}
       <div className="row form-border" style={{ width: "90%" }}>
         <div
           className="col-lg-4 d-flex"
@@ -85,24 +73,44 @@ const UserProfile = () => {
             }}
           >
             <p
-              style={{ display: "inline-block", width: "50%", height: "3rem" }}
+              style={{
+                display: "inline-block",
+                flexGrow: "1",
+                flexBasis: 100,
+                height: "3rem",
+              }}
             >
               <strong>Name:</strong> {name}
             </p>
             <p
-              style={{ display: "inline-block", width: "50%", height: "3rem" }}
+              style={{
+                display: "inline-block",
+                flexGrow: "1",
+                flexBasis: 100,
+                height: "3rem",
+              }}
             >
               <strong>Email:</strong> {email}
             </p>
           </div>
           <div className="d-flex">
             <p
-              style={{ display: "inline-block", width: "50%", height: "3rem" }}
+              style={{
+                display: "inline-block",
+                flexGrow: "1",
+                flexBasis: 100,
+                height: "3rem",
+              }}
             >
               <strong>Mobile:</strong> {contact}
             </p>
             <p
-              style={{ display: "inline-block", width: "50%", height: "3rem" }}
+              style={{
+                display: "inline-block",
+                flexGrow: "1",
+                flexBasis: 100,
+                height: "3rem",
+              }}
             >
               <strong>Gender:</strong>
               {gender}

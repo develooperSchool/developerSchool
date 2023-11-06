@@ -12,7 +12,6 @@ export const getUserByIdAction: any = createAsyncThunk(
     try {
       const { id } = payload;
       let response = await UserService.getUserById(id);
-      console.log(response);
       return response;
     } catch (error: any) {
       console.log(error);
