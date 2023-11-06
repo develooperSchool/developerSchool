@@ -25,5 +25,12 @@ export const userSlice = createSlice({
       console.log("Data: ", data);
       state.user = data[0];
     });
+      
+      builder.addCase(userAction.login.fulfilled, (state, action) => {
+        console.log("payload: ", action.payload);
+        const { data } = action.payload;
+        console.log("Data: ", data);
+        state.user = data[0];
+      });
   },
 });

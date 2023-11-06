@@ -3,19 +3,36 @@ import { Link } from "react-router-dom";
 import loginService from "../service/loginService";
 import ILogin from "../model/ILogin";
 import "../../../Style/form.css";
+import { AppDispatch, RootState } from "../../../Redux/Store";
+import { useDispatch, useSelector } from "react-redux";
+import * as UserReducer from "../../../Redux/User/user.reducer";
+import * as UserAction from "../../../Redux/User/user.action";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [email, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const dispatch: AppDispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const userReduxState: UserReducer.InitialState = useSelector(
+    (state: RootState) => {
+      return state[UserReducer.UserFeatureKey];
+    }
+  );
   const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(email, password);
     let data: ILogin = { email, password };
-    loginService
-      .login(data)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+    dispatch(UserAction.login(data))
+      .then((response: any) => {
+        if (response && !response.error && response.payload) {
+          const { user_id } = response.payload.data[0];
+          navigate(`/user-profile/${user_id}`);
+        }
+      })
+      .catch((error: any) => console.log(error));
   };
   return (
     <div className="d-flex justify-content-center">
