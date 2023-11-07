@@ -135,18 +135,21 @@ const addFacultyAllotment = async (body) => {
 /*SIGN IN USERS */
 const signInUser = async (body) => {
   let msg = "";
+  let result = [];
   await dao
     .signInUser(body)
-    .then((resp) => {
-      if (resp.length > 0) msg = "Login Success";
-      else {
+    .then(async (resp) => {
+      if (resp && resp.length > 0) {
+        result = await getUserByEmailId(body.email);
+      } else {
         msg = "Login Failed";
       }
     })
     .catch((err) => {
       console.log(err);
     });
-  return msg;
+  if (result.length > 0) return result;
+  else return msg;
 };
 
 /* DELETE USERS */

@@ -43,6 +43,7 @@ const UserProfile = () => {
       .then((response: any) => {
         const { first_name, email_id, contact, gender } =
           response.payload.data[0];
+        localStorage.setItem("user", JSON.stringify(response.payload.data[0]));
         setName(first_name);
         setEmail(email_id);
         setContact(contact);
