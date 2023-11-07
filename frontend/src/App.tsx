@@ -1,29 +1,11 @@
-
-
-
-
-import Getallcourse from './Course/pages/Getallcourse';
-import Admindashboard from './Dashborad/Admindashboard';
 import "primeflex/primeflex.css";
-
-
-
+import Admindashboard from "./components/Dashborad/Admindashboard";
+import store from "./Redux/Store";
 
 function App() {
   return (
     <div className="App">
-
-      
-  
-  
-
-   <Admindashboard/>
-
-   
-   
-
-    
-      
+      <Admindashboard />
     </div>
   );
 }

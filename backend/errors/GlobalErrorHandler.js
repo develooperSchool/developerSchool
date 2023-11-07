@@ -9,7 +9,7 @@ class GlobalErrorHandler extends Error {
   handlerError = (message, statusCode, description, timeStamp, res) => {
     res
       .status(statusCode)
-      .send({ message, statusCode, description, timeStamp });
+      .json({ message, statusCode, description, timeStamp });
   };
 }
 
