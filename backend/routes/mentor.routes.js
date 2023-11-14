@@ -33,7 +33,12 @@ router.get("/mentors", (req, res) => {
 router.post("/addMentor", 
     validation.addMentorValidation,
     mentorController.addMentorController
-)
+);
+
+//  update mentor by id
+// router.get("/mentor/:id",
+
+// )
 
 // update method 
 

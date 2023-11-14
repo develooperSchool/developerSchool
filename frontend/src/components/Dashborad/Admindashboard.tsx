@@ -220,6 +220,7 @@ import Login from "../User/pages/Login";
 import ForgotPassword from "../User/pages/ForgotPassword";
 import Register from "../User/pages/Register";
 import UserProfile from "../User/pages/UserProfile";
+import GetAllMentor from "../mentor/Pages/Getallmentor";
 
 const Admindashboard = () => {
   return (
@@ -238,11 +239,16 @@ const Admindashboard = () => {
               <Route path="/course" element={<Getallcourse />}></Route>
               <Route path="/login" element={<Login />}></Route>
               <Route path="/register" element={<Register />}></Route>
+           
               <Route
                 path="/forgot-password"
                 element={<ForgotPassword />}
               ></Route>
               <Route path="/user-profile/:id" element={<UserProfile />}></Route>
+            </Routes>
+            <Routes>
+            <Route path="/getallmentor" element={<GetAllMentor />}></Route>
+            
             </Routes>
             {/* <Routes>
             </Routes> */}
@@ -259,6 +265,11 @@ const Admindashboard = () => {
                     <Route path="/" element={<PiechartCircle />}></Route>
                   </Routes>
                 </div>
+
+                
+                 
+                     
+                
               </div>
             </div>
           </div>

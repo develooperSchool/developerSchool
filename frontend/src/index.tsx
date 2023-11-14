@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 
 // import ReactDOM from 'react-dom';
-
 // bootstrap Config
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 import { BrowserRouter } from "react-router-dom";

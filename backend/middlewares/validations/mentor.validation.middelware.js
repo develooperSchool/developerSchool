@@ -9,12 +9,12 @@ const deleteMentorByIdValidation = (req, res, next) => {
     else next();
 }
 
-// const getMentorByIdValidation = (req, res, next) => {
-//     if (util.isInvalidId(req.params.id)) {
-//         throw new InvalidIdError("ID GIVEN TO FETCH MENTOR IS INVALID", res);
-//     }
-//     else next();
-// }
+const getMentorByIdValidation = (req, res, next) => {
+    if (util.isInvalidId(req.params.id)) {
+        throw new InvalidIdError("ID GIVEN TO FETCH MENTOR IS INVALID", res);
+    }
+    else next();
+}
 
 const addMentorValidation = (req,res,next) =>{
 if(util.isInvalidName(req.body.mentorName)){

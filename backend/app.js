@@ -8,7 +8,8 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users.routes.js");
 var revenueRouter = require("./routes/revenue.routes");
 var curriculumRouter = require("./routes/curriculumRoutes")
-var courseRouter = require('./routes/courseRoutes');var mentorRouter  = require ("./routes/mentor.routes")
+var courseRouter = require('./routes/courseRoutes');
+var mentorRouter  = require ("./routes/mentor.routes")
 var roleRouter    = require("./routes/role.routes")
 
 var app = express();
@@ -29,6 +30,14 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/api/v1/user", usersRouter);

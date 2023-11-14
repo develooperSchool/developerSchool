@@ -14,6 +14,8 @@ const getAllMentors = async () => {
     return row
 }
 
+
+
 const addMentor = async (body) => {
     const { mentorName, roleId, courseId, userId } = body
     const values = [mentorName, roleId, courseId, userId]
@@ -22,6 +24,10 @@ const addMentor = async (body) => {
     const [rows, fields] = await db.execute(query, values);
     console.log(rows)
 };
+
+// updateMentorById: 
+ 
+
 
 // put method 
 const updateMentor = async (id, body) => {
