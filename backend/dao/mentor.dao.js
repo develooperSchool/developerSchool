@@ -12,9 +12,7 @@ const getAllMentors = async () => {
         console.log(error);
     }
     return row
-}
-
-
+};
 
 const addMentor = async (body) => {
     const { mentorName, roleId, courseId, userId } = body
@@ -26,14 +24,27 @@ const addMentor = async (body) => {
 };
 
 // updateMentorById: 
- 
+ const getMentorById =async(id) =>{
+    let row =[]
+    // let id=req.params.id
+    try {
+        const [rows, fields] = await db.query(
+          "SELECT * FROM mentor_details WHERE mentor_id = ?",
+        //   [id]
+        );
+      } catch (err) {
+        console.error(err);
+      }
+      return row;
+
+ };
 
 
 // put method 
 const updateMentor = async (id, body) => {
 
     const { mentorName, roleId, courseId, userId } = (id, body)
-    const values = [mentorName, roleId, courseId, userId, id]
+    const values = [mentorName, roleId, courseId, userId,id]
     const query = "UPDATE mentor_details SET mentor_name = ?, role_id = ?, course_id = ?, user_id = ?  WHERE mentor_id = ?";
 
     const rows = db.execute(query, values);
@@ -58,4 +69,4 @@ const deleteMentorById = async (id) => {
     return message;
 }
 
-module.exports = { getAllMentors, addMentor, updateMentor, deleteMentorById };
+module.exports = { getAllMentors, addMentor, updateMentor, deleteMentorById,getMentorById };

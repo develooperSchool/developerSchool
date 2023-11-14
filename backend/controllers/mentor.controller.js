@@ -24,6 +24,17 @@ const addMentorController=(req,res)=>{
     })
 }
 
+// getMentorById 
+const getMentorByIdController=(req,res)=>{
+    console.log(req.params.id);
+    service.getMentorById(req,res)
+    .then((resp)=>{
+        resp.status(200).send(resp)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+}
 
 // put method 
 
@@ -55,4 +66,4 @@ service.deleteMentorById(req.params.id)
 })
 }
 
-module.exports ={getAllMentors, addMentorController,updateMentor,deleteMentorById};
+module.exports ={getAllMentors, addMentorController,updateMentor,deleteMentorById,getMentorByIdController};

@@ -36,16 +36,17 @@ router.post("/addMentor",
 );
 
 //  update mentor by id
-// router.get("/mentor/:id",
-
-// )
+router.get("/mentor/:id",
+validation.getMentorByIdValidation,
+mentorController.getMentorByIdController
+)
 
 // update method 
 
 router.put("/update/:id",
  validation.updateMentorValidation,
     mentorController.updateMentor
-)
+);
 
 // delete method 
 router.delete("/delete/:id",

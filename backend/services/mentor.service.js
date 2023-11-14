@@ -36,6 +36,19 @@ await dao
 return status;
 };
 
+// getMentorById
+const getMentorById = async (req, res) => {
+    let rows = [];
+    await dao.getMentorById(req, res)
+      .then((res) => {
+        rows = res;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return rows;
+  };
+  
 // put method 
 
 const updateMentor =async(id,body)=>{
@@ -65,4 +78,4 @@ const deleteMentorById=async(id)=>{
 }
 
 
-module.exports={getAllMentors, addMentor,updateMentor,deleteMentorById};
+module.exports={getAllMentors, addMentor,updateMentor,deleteMentorById ,getMentorById};
