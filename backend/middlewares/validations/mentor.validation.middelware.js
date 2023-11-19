@@ -38,7 +38,7 @@ const updateMentorValidation = (req,res,next) =>{
     }
     if(util.isInvalidId(req.body.courseId)){
     throw new InvalidIdError("THE ENTERED COURSE ID IS INVALID",res)    
-    }
+}
     if(util.isInvalidId(req.body.userId)){
     throw new InvalidIdError("THE ENTERD USER ID IS INVALID",res)
     }

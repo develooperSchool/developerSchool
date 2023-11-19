@@ -39,10 +39,9 @@ router.post("/addMentor",
 router.get("/mentor/:id",
 validation.getMentorByIdValidation,
 mentorController.getMentorByIdController
-)
+);
 
 // update method 
-
 router.put("/update/:id",
  validation.updateMentorValidation,
     mentorController.updateMentor

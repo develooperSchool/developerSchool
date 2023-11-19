@@ -24,21 +24,22 @@ const addMentor = async (body) => {
 };
 
 // updateMentorById: 
- const getMentorById =async(id) =>{
+const getMentorById =async(req,res) =>{
     let row =[]
-    // let id=req.params.id
+    let id=req.params.id
     try {
+        
         const [rows, fields] = await db.query(
           "SELECT * FROM mentor_details WHERE mentor_id = ?",
-        //   [id]
-        );
+           [id]
+        
+           );
+           row=rows;
       } catch (err) {
         console.error(err);
       }
       return row;
-
  };
-
 
 // put method 
 const updateMentor = async (id, body) => {

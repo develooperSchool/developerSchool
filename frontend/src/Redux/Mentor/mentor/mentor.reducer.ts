@@ -6,12 +6,12 @@ export const mentorFeatureKey = "mentorFeature";
 
 export interface InitialState{
     mentors:Imentor[],
-    mentor:Imentor
+    mentor:Imentor,
 };
 
 const initialState :InitialState ={
     mentors: [] as Imentor [],
-    mentor :{} as Imentor
+    mentor :{} as Imentor,
 }
 
 export const MentorSlice = createSlice({
@@ -30,6 +30,24 @@ builder.addCase(MentorAction.addMentorAction.fulfilled,(state,action)=>{
     state.mentor=action.payload
 });
 
+// update mentor 
+builder.addCase(MentorAction.updateMentorAction.fulfilled,(state,action)=>{
+    state.mentor=action.payload
+})
+
+
+// delete mentor 
+builder.addCase(MentorAction.deleteMentorAction.fulfilled,(state,action)=>{
+    state.mentor= {} as Imentor
+})
+builder.addCase(MentorAction.getMentorByIdAction.fulfilled,(state,action)=>{
+    state.mentor=action.payload
+})
+
+
 }
 
 });
+
+
+// delete mentor 

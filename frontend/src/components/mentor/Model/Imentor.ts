@@ -7,3 +7,10 @@ export interface Imentor{
     user_id:string 
 };
 
+export interface IMentorRequest {
+    mentorId:string;
+    mentorName:string;
+    roleId:string;
+    courseId:string;
+    userId:string 
+}

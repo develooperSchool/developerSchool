@@ -29,7 +29,7 @@ const getMentorByIdController=(req,res)=>{
     console.log(req.params.id);
     service.getMentorById(req,res)
     .then((resp)=>{
-        resp.status(200).send(resp)
+        res.status(200).send(resp)
     })
     .catch((err)=>{
       console.log(err)
