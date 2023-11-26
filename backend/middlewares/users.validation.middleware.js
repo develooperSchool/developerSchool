@@ -2,7 +2,7 @@
 const userUtil = require("../utils/users.utils");
 const InvalidIdError = require("../errors/InvalidIdError");
 const InvalidEmailError = require("../errors/InvalidEmailError");
-const InvalidPasswordError = require("../errors/InvalidPasswordError.JS");
+const InvalidPasswordError = require("../errors/InvalidPasswordError");
 const InvalidNameError = require("../errors/InvalidNameError");
 const { INVALID_CONTACT } = require("../utils/revenue.contants");
 const InvalidContactError = require("../errors/InvalidContactError");
