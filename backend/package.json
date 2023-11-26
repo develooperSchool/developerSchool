@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "build": "echo build_successful"
+    "build": "npm install"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
