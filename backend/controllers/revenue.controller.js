@@ -30,7 +30,8 @@ const getRevenueCategoryById = (req, res) => {
   service
     .getRevenueCategoryById(req, res)
     .then((resp) => {
-      res.status(200).send(resp);
+      // res.status(200).send(resp);
+      respond(SUCCESS, HttpStatusCode.OK, resp, new Date(Date.now()), res);
     })
     .catch((err) => {
       console.log(err);
